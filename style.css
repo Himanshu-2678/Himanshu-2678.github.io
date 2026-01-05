@@ -12,7 +12,10 @@ body {
   line-height: 1.6;
 }
 
+/* -------------------------------- */
 /* GLOBAL SECTIONS */
+/* -------------------------------- */
+
 section {
   max-width: 1150px;
   margin: 0 auto;
@@ -32,6 +35,7 @@ section > h2 {
 /* -------------------------------- */
 /* NAVBAR */
 /* -------------------------------- */
+
 .navbar {
   position: sticky;
   top: 0;
@@ -74,6 +78,7 @@ html {
 /* -------------------------------- */
 /* HERO */
 /* -------------------------------- */
+
 .hero-centered {
   min-height: 60vh;
   display: flex;
@@ -115,18 +120,18 @@ html {
   padding: 8px;
   border: 1px solid #eee;
   border-radius: 8px;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .hero-actions img:hover {
   transform: scale(1.06);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-  
 }
 
 /* -------------------------------- */
 /* ABOUT */
 /* -------------------------------- */
+
 #about {
   padding-top: 30px;
 }
@@ -149,19 +154,7 @@ html {
 }
 
 .timeline-item {
-  position: relative;
   padding-bottom: 30px;
-}
-
-.timeline-item::before {
-  content: "";
-  position: absolute;
-  left: -29px;
-  top: 6px;
-  width: 10px;
-  height: 10px;
-  background: #2563eb;
-  border-radius: 50%;
 }
 
 .timeline-item .time {
@@ -184,77 +177,16 @@ html {
 /* -------------------------------- */
 /* PROJECTS */
 /* -------------------------------- */
-.project {
-  margin-top: 30px;
-  padding: 24px 0;
-  border-bottom: 1px solid #eee;
+
+.projects-header {
+  text-align: center;
+  margin-bottom: 40px;
 }
-
-.project-meta {
-  margin-top: 8px;
-  color: #555;
-  font-size: 0.9rem;
-}
-
-.project-links {
-  margin-top: 12px;
-}
-
-.icon-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-right: 18px;
-  font-size: 0.9rem;
-  color: #2563eb;
-  font-weight: 500;
-  text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.icon-link:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.15);
-}
-
-.icon-img {
-  width: 16px;
-  height: 16px;
-}
-
-/* -------------------------------- */
-/* RESPONSIVE */
-/* -------------------------------- */
-@media (max-width: 768px) {
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-centered h1 {
-    font-size: 2.6rem;
-  }
-}
-
-/* -------------------------------- */
-/* ACCESSIBILITY */
-/* -------------------------------- */
-@media (prefers-reduced-motion: reduce) {
-  a,
-  .hero-actions img {
-    transition: none;
-  }
-}
-
-/* -------------------------------- */
-/* FEATURED PROJECTS */
-/* -------------------------------- */
 
 .projects-subtitle {
-  margin-top: -8px;
-  margin-bottom: 40px;
+  margin: 12px auto 40px;
+  max-width: 600px;
   color: #555;
-  max-width: 700px;
-  
 }
 
 .projects-grid {
@@ -271,6 +203,11 @@ html {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
 .project-card h3 {
   margin-bottom: 10px;
   font-size: 1.2rem;
@@ -282,18 +219,11 @@ html {
   margin-bottom: 14px;
 }
 
-.project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-}
 .project-image {
-  position: relative;
-  width: 100%;
   height: 180px;
   overflow: hidden;
   border-radius: 12px;
   margin-bottom: 16px;
-  background: #fff;
 }
 
 .project-image img {
@@ -301,27 +231,8 @@ html {
   height: 100%;
   object-fit: cover;
 }
-.project-image::after {
-  content: "";
-  position: absolute;
-  inset: 0;
 
-  /* bottom fade to white */
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0) 40%,
-    rgba(255, 255, 255, 0) 70%,
-    rgba(255, 255, 255, 1) 100%
-  );
-}
-
-.project-card:hover .project-image img {
-  transform: scale(1.05);
-}
-
-/* -------------------------------- */
-/* PROJECT SKILLS (PILLS) */
-/* -------------------------------- */
+/* Skills */
 
 .project-skills {
   display: flex;
@@ -337,49 +248,44 @@ html {
   color: #2563eb;
   background: #eef2ff;
   border-radius: 999px;
-  white-space: nowrap;
 }
 
-.skill-tag:hover {
-  background: #e0e7ff;
+/* Project footer CTA */
+
+.projects-footer {
+  margin-top: 56px;
+  text-align: center;
 }
 
-
-.projects-subtitle {
-  margin: 12px auto 40px;
-  max-width: 600px;
-  color: #555;
+.github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #111;
 }
-.projects-header {
+
+/* -------------------------------- */
+/* BLOGS */
+/* -------------------------------- */
+
+.blogs-header-centered {
   text-align: center;
   margin-bottom: 40px;
 }
 
-/* -------------------------------- */
-/* BLOGS SECTION */
-/* -------------------------------- */
-
-.blogs-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-}
-
-.blogs-header h2 {
-  margin: 0;
-}
-
-.view-all {
-  font-size: 0.9rem;
-  color: #2563eb;
-  text-decoration: none;
-  font-weight: 500;
-  transition: transform 0.15s ease;
-}
-
-.view-all:hover {
-  transform: translateX(3px);
+.blogs-subtitle {
+  font-size: 0.95rem;
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 48px;
 }
 
 .blogs-grid {
@@ -393,7 +299,6 @@ html {
   border: 1px solid #eee;
   border-radius: 14px;
   background: #fff;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .blog-card h3 {
@@ -404,7 +309,6 @@ html {
 .blog-card p {
   font-size: 0.9rem;
   color: #555;
-  margin-bottom: 14px;
 }
 
 .blog-meta {
@@ -412,147 +316,103 @@ html {
   color: #777;
 }
 
-.blog-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+.blogs-footer {
+  margin-top: 48px;
+  text-align: center;
 }
 
-@media (max-width: 768px) {
-  .blogs-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .blogs-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-}
-
-.blog-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-
-/* -------------------------------- */
-/* ABOUT – RESUME BUTTON */
-/* -------------------------------- */
-
-.about-actions {
-  margin-top: 24px;
-}
-
-.resume-btn {
-  display: inline-block;
-  padding: 10px 18px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #2563eb;
-  border: 1px solid #2563eb;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
-}
-
-.resume-btn:hover {
-  background: #2563eb;
-  color: #fff;
-  transform: translateY(-1px);
-}
-
-/* -------------------------------- */
-/* CONTACT SECTION */
-/* -------------------------------- */
-
-.contact-intro {
-  margin-bottom: 28px;
-  color: #555;
-  max-width: 600px;
-}
-
-.contact-links {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.contact-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: #111;
-  font-size: 0.95rem;
-  align-self: flex-start;   /* 🔑 THIS FIX */
-  transition: transform 0.15s ease;
-}
-
-.contact-item img {
-  width: 20px;
-  height: 20px;
-}
-
-.contact-item:hover {
-  transform: translateX(4px);
-}
-
-/* -------------------------------- */
-/* CONTACT – DARK SECTION */
-/* -------------------------------- */
-
-.contact-dark {
-  background: #0f172a;        /* deep slate */
-  color: #e5e7eb;
-  border-bottom: none;
-}
-
-.contact-dark h2 {
-  color: #fff;
-}
-
-.contact-dark .contact-intro {
-  color: #cbd5e1;
-}
-
-/* Contact links container */
-.contact-dark .contact-links {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-/* Individual contact item */
-.contact-dark .contact-item {
+.medium-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.8rem;
-  font-style: italic;
-  color: #cbd5e1;
+  padding: 10px 18px;
+  border: 1px solid #eee;
+  border-radius: 8px;
   text-decoration: none;
-  transition: color 0.15s ease, transform 0.15s ease;
+  color: #111;
 }
 
-.contact-dark .contact-item img {
-  width: 16px;
-  height: 16px;
-  opacity: 0.8;
+/* -------------------------------- */
+/* CONTACT – FINAL */
+/* -------------------------------- */
+
+#contact {
+  max-width: 100%;
+  margin: 0;
+  padding: 100px 20px 50px;
 }
 
-/* Hover = subtle lift */
-.contact-dark .contact-item:hover {
-  color: #fff;
-  transform: translateX(3px);
+/* -------------------------------- */
+/* CONTACT – LIGHT VERSION */
+/* -------------------------------- */
+
+.contact-dark {
+  background: #fff;
+  color: #111;
+  border-top: 1px solid #eee;
 }
 
-@media (max-width: 640px) {
-  .contact-dark .contact-links {
-    flex-direction: column;
-    gap: 14px;
-  }
+.contact-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
 }
+
+.contact-title {
+  margin-bottom: 20px;  /* smaller gap now that subtitle exists */
+  color: #111;
+}
+
+
+.contact-email {
+  color: #555;
+  margin-bottom: 48px;
+  font-size: 1rem;
+}
+
+.contact-email .email-text {
+  margin-left: 6px;
+  font-family: monospace;
+  user-select: text;
+}
+
+.contact-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #111;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.contact-subtitle {
+  max-width: 620px;
+  margin: 12px auto 40px;  /* 🔑 THIS is the key */
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+
 
 /* -------------------------------- */
 /* FOOTER */
@@ -564,4 +424,98 @@ html {
   font-size: 0.75rem;
   color: #777;
 }
+
+/* -------------------------------- */
+/* RESPONSIVE */
+/* -------------------------------- */
+
+@media (max-width: 768px) {
+  .about-grid,
+  .blogs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-centered h1 {
+    font-size: 2.6rem;
+  }
+
+  .contact-title {
+    font-size: 1.8rem;
+  }
+}
+.blog-link {
+  text-decoration: none;
+  color: inherit;
+}
+.project-links a,
+.project-links a:hover,
+.project-links a:focus,
+.project-links a:active {
+  text-decoration: none;
+}
+
+/* -------------------------------- */
+/* ABOUT – RESUME BUTTON (FIX) */
+/* -------------------------------- */
+
+.resume-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #2563eb;
+  border: 1px solid #2563eb;
+  border-radius: 8px;
+  text-decoration: none;   /* 🔑 removes underline */
+  background: transparent;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.resume-btn:hover {
+  background: #2563eb;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* -------------------------------- */
+/* PROJECT CARD – QUIET ACTION LINKS */
+/* -------------------------------- */
+
+.project-links {
+  margin-top: 14px;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.project-links a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #2563eb;
+  text-decoration: none;     /* no underline */
+  padding: 0;               /* no button feel */
+  border: none;
+  background: none;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.project-links a:hover {
+  color: #1e40af;
+  transform: translateY(-1px);
+}
+/* -------------------------------- */
+/* PROJECTS – FOOTER CTA SPACING */
+/* -------------------------------- */
+
+.projects-footer {
+  margin-top: 56px;
+  text-align: center;
+}
+
+.projects-footer-text {
+  margin-bottom: 22px;   /* 🔑 adds breathing space */
+  font-size: 0.95rem;
+  color: #555;
+}
+
 
