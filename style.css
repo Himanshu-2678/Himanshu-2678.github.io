@@ -84,6 +84,27 @@ section > h2 {
   background: var(--bg-alt);
 }
 
+/* Make About, Blogs, and Contact sections full-screen background cards while preserving inner content layout */
+#about,
+#blogs,
+#contact {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  min-height: 100vh; /* full viewport height */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Keep the internal content constrained and centered as before */
+#about > *,
+#blogs > *,
+#contact > * {
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
 /* =========================================================
    NAVBAR
    ========================================================= */
@@ -131,24 +152,19 @@ html {
    ========================================================= */
 
 .hero-centered {
-  min-height: 60vh;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+
   text-align: center;
-  padding: 60px 20px 20px;
+  padding: 60px 20px;
 
-  background: linear-gradient(
-    180deg,
-    rgba(29, 84, 109, 0.08) 0%,
-    var(--bg-main) 70%
-  );
-}
-
-.hero-centered h1 {
-  font-size: 3.6rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
 }
 
 .hero-centered h2 {
@@ -163,6 +179,67 @@ html {
   font-size: 1.05rem;
   color: var(--text-muted);
 }
+
+/* =========================================================
+   HERO WRAPPER (BACKGROUND IMAGE + TOP DARK OVERLAY)
+   ========================================================= */
+
+.hero-wrapper {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.hero-wrapper::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  background: url("assets/images/hero-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  z-index: -2;
+}
+
+.hero-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 45%; /* 🔑 dark only top portion */
+
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0.35)
+  );
+
+  z-index: 1;
+}
+
+.hero-wrapper > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-wrapper .navbar {
+  background: transparent;
+  border-bottom: none;
+}
+
+.hero-wrapper .logo,
+.hero-wrapper .nav-right a {
+  color: #ffffff;
+}
+
+
 
 .hero-actions {
   margin-top: 30px;
@@ -313,6 +390,7 @@ html {
   color: #2563eb;
   background: #eef2ff;
   border-radius: 999px;
+  margin-top: 10px;
 }
 
 .project-links {
@@ -374,9 +452,10 @@ html {
   font-size: 0.95rem;
   color: var(--text-muted);
   line-height: 1.6;
+  margin-top: 50px;
 }
 .blogs-footer .medium-btn {
-  margin-top: 20px;
+  margin-top: 22px;
 }
 
 /* =========================================================
@@ -457,6 +536,17 @@ html {
               color var(--transition-fast);
 }
 
+/* Normalize button icon alignment */
+.contact-btn img,
+.github-btn img,
+.medium-btn img,
+.resume-btn img {
+  width: 16px;
+  height: 16px;
+  display: block;      /* 🔑 THIS FIXES THE HEIGHT ISSUE */
+}
+
+
 .btn:hover,
 .resume-btn:hover,
 .github-btn:hover,
@@ -494,11 +584,163 @@ html {
 }
 
 .projects-footer {
-  margin-top: 56px;
+  margin-top: 50px;
   text-align: center;
 }
 
 .projects-footer-text {
   margin-bottom: 22px;
   color: var(--text-muted);
+}
+
+/* =========================================================
+   CONTACT FORM – FINAL GRID (EXPLICIT PLACEMENT)
+   ========================================================= */
+
+.contact-form-grid {
+  max-width: 720px;
+  margin: 56px auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  grid-template-rows: auto auto auto auto;
+  gap: 16px;
+}
+
+/* Inputs & textarea */
+.contact-form-grid input,
+.contact-form-grid textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text-main);
+}
+
+/* Explicit placement */
+.field-name {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.field-email {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.field-phone {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.field-message {
+  grid-column: 2;
+  grid-row: 1 / span 3; /* spans Name + Email + Phone */
+  resize: none;
+}
+
+/* Focus state */
+.contact-form-grid input:focus,
+.contact-form-grid textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(29, 84, 109, 0.12);
+}
+
+/* Submit button */
+.form-submit {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .contact-form-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .field-message {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+
+/* =========================================================
+   LANDING HERO TEXT (FINAL — CLEAN)
+   ========================================================= */
+
+.hero-centered .hero-name {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 4.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.hero-centered .hero-tagline {
+  margin-top: 14px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.hero-enter-btn {
+  margin-top: 32px;
+  padding: 14px 30px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111111;
+  background: #ffffff;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hero-enter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero-centered .hero-name {
+    font-size: 3rem;
+  }
+
+  .hero-centered .hero-tagline {
+    font-size: 1.2rem;
+  }
+}
+
+/* =========================================================
+   HERO PROFILE IMAGE
+   ========================================================= */
+
+.hero-profile-img {
+  width: 220px;
+  height: 220px;
+
+  border-radius: 50%;
+  object-fit: cover;
+
+  border: 4px solid #ffffff;
+
+  margin-bottom: 24px;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 768px) {
+  .hero-profile-img {
+    width: 140px;
+    height: 140px;
+  }
 }

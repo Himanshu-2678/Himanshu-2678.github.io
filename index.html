@@ -12,39 +12,52 @@
 <body>
 
   <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="nav-container">
-      <span class="logo">Himanshu Yadav</span>
+    <div class="hero-wrapper">
 
-      <nav class="nav-right">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#blogs">Blogs</a>
-        <a href="#contact">Contact</a>
-      </nav>
+    <header class="navbar">
+        <div class="nav-container">
+        <span class="logo">Himanshu Yadav</span>
+
+        <nav class="nav-right">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#blogs">Blogs</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        </div>
+    </header>
+
+    <section class="hero-centered">
+        <img
+        src="assets/images/unnamed.jpg"
+        alt="Himanshu Yadav"
+        class="hero-profile-img">
+        
+        <h1 class="hero-name">Himanshu Yadav</h1>
+        <p class="hero-tagline">Applied AI / ML Engineer</p>
+
+        <a href="#about" class="hero-enter-btn">
+        Enter Portfolio
+        </a>
+    </section>
+
     </div>
-  </header>
 
-  <!-- HERO -->
-  <section class="hero-centered">
-    <h1>Himanshu Yadav</h1>
-    <h2>AI & Machine Learning Engineer</h2>
-
-    <p>
-      Building end-to-end AI systems that solve real-world problems — from data and models to deployment and decision-making.
-    </p>
-
+<!--
     <div class="hero-actions">
-      <a href="mailto:radhekrishna8267@gmail.com">
+    <a href="mailto:radhekrishna8267@gmail.com">
         <img src="assets/images/envelope.png" alt="Email">
-      </a>
-      <a href="https://github.com/Himanshu-2678" target="_blank">
+    </a>
+    <a href="https://github.com/Himanshu-2678" target="_blank">
         <img src="assets/images/github.png" alt="GitHub">
-      </a>
-      <a href="https://linkedin.com" target="_blank">
+    </a>
+    <a href="https://linkedin.com" target="_blank">
         <img src="assets/images/linkedin.png" alt="LinkedIn">
-      </a>
+    </a>
     </div>
+-->
+
   </section>
 
     <!-- ABOUT -->
@@ -66,7 +79,7 @@
         </p>
 
         <div class="about-actions">
-            <a href="assets/resume/Himanshu_Yadav_AI_ML_Resume.pdf"
+            <a href="assets/resume/Himanshu_Yadav_Resume.pdf"
             target="_blank"
             class="resume-btn">
             My Resume
@@ -230,7 +243,7 @@
           <img src="assets/images/meetsync_workflow.png" alt="MeetSync blog screenshot">
         </div>
 
-        <h3>MeetSync: Practical AI Engineering with Deepgram, Transformers, and Flask</h3>
+        <h3>MeetSync: Practical AI Engineering with Deepgram, Transformers.</h3>
 
         <p>
           How I built an end-to-end AI meeting minutes system,
@@ -321,6 +334,50 @@
         </p>
 
         <div class="contact-buttons">
+
+        <form
+        class="contact-form contact-form-grid"
+        action="https://formspree.io/f/xpwzqzvj"
+        method="POST"
+        >
+
+        <input
+            class="field-name"
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+        >
+
+        <textarea
+            class="field-message"
+            name="message"
+            placeholder="Please type your message here"
+            required
+        ></textarea>
+
+        <input
+            class="field-email"
+            type="email"
+            name="_replyto"
+            placeholder="Email"
+            required
+        >
+
+        <input
+            class="field-phone"
+            type="tel"
+            name="phone"
+            placeholder="Your Phone"
+        >
+
+        <div class="form-submit">
+            <button type="submit" class="contact-btn">
+            Send message
+            </button>
+        </div>
+
+        </form>
 
         <!-- Email -->
         <a
