@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Himanshu Yadav</title>
+  <style>
+    /* =========================================================
+       INTENTIONAL - UNCOMFORTABLE SIMPLICITY
+       ========================================================= */
+    :root {
+      --white: #ffffff;
+      --off-white: #fafafa;
+      --text: #1a1a1a;
+      --text-light: #666666;
+      --border: #e5e5e5;
+      --accent: #0066cc;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* =========================================================
+       HERO - SILENCE & POWER
+       ========================================================= */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .hero-statement {
+      font-size: 80px;
+      font-weight: 300;
+      letter-spacing: -1.5px;
+      color: var(--text);
+      margin-bottom: 32px;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .hero-identity {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* =========================================================
+       ABOUT - THE WHY
+       ========================================================= */
+    .about-section {
+      background: var(--off-white);
+      padding: 120px 40px;
+    }
+
+    .about-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .section-title {
+      font-size: 48px;
+      font-weight: 500;
+      letter-spacing: -1px;
+      margin-bottom: 32px;
+      color: var(--text);
+    }
+
+    .section-content {
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    .section-content p {
+      margin-bottom: 32px;
+    }
+
+    .resume-btn {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 14px 32px;
+      background: var(--text);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 500;
+      transition: opacity 0.2s ease;
+    }
+
+    .resume-btn:hover {
+      opacity: 0.8;
+    }
+
+    .education-sidebar {
+      background: var(--white);
+      padding: 40px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .education-sidebar h3 {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .education-sidebar h4 {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .education-sidebar p {
+      font-size: 15px;
+      color: var(--text-light);
+    }
+
+    .education-sidebar {
+  margin-top: 20px;
+}
+
+    /* =========================================================
+       PROJECTS - THE HEART
+       ========================================================= */
+    .projects-section {
+      padding: 120px 0;
+    }
+
+    .projects-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .project {
+      margin-bottom: 120px;
+      padding-bottom: 80px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .project-title {
+      font-size: 48px;
+      font-weight: 500;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    .project-philosophy {
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--text-light);
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+
+    .project-toggle {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 32px;
+      text-align: center;
+      font-style: italic;
+    }
+
+    .project-details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
+    }
+
+    .project-detail h4 {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+
+    .project-detail p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .project-tech {
+      margin-top: 48px;
+      font-size: 14px;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    /* =========================================================
+       WRITING - POINT OF VIEW
+       ========================================================= */
+    .writing-section {
+      background: var(--off-white);
+      padding: 120px 40px;
+    }
+
+    .writing-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .writing-item {
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .writing-item:last-child {
+      border-bottom: none;
+    }
+
+    .writing-item a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: opacity 0.2s ease;
+    }
+
+    .writing-item a:hover {
+      opacity: 0.6;
+    }
+
+    .writing-title {
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .writing-excerpt {
+      font-size: 17px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       CONTACT - QUIET CONFIDENCE
+       ========================================================= */
+    .contact-section {
+      padding: 120px 40px;
+      text-align: center;
+    }
+
+    .contact-message {
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 48px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-email-wrapper {
+      margin-bottom: 32px;
+    }
+
+    .contact-email-wrapper p {
+      font-size: 15px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .contact-email {
+      font-size: 17px;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 2px;
+      transition: opacity 0.2s ease;
+    }
+
+    .contact-email:hover {
+      opacity: 0.6;
+    }
+
+    .contact-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+
+    .contact-btn {
+      padding: 12px 24px;
+      background: var(--text);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: opacity 0.2s ease;
+    }
+
+    .contact-btn:hover {
+      opacity: 0.8;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    .footer {
+      padding: 40px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-light);
+      border-top: 1px solid var(--border);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+    @media (max-width: 768px) {
+      .hero-statement {
+        font-size: 48px;
+      }
+
+      .hero-identity {
+        font-size: 14px;
+      }
+
+      .about-container {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .section-title {
+        font-size: 36px;
+      }
+
+      .section-content {
+        font-size: 20px;
+      }
+
+      .project-title {
+        font-size: 36px;
+      }
+
+      .project-philosophy {
+        font-size: 20px;
+      }
+
+      .project-details {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .writing-title {
+        font-size: 24px;
+      }
+
+      .contact-message {
+        font-size: 20px;
+      }
+
+      .contact-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .contact-btn {
+        width: 200px;
+      }
+    }
+
+/* Hidden by default */
+.project-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    max-height 0.6s ease,
+    opacity 0.4s ease,
+    transform 0.4s ease;
+  margin-top: 32px;
+}
+
+/* When expanded */
+.project-content.open {
+  max-height: 1200px; /* large enough to fit content */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Toggle button */
+.project-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-light);
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+/* Action buttons */
+.project-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.project-btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.live-btn {
+  background: var(--accent);
+  color: var(--white);
+}
+
+.github-btn {
+  background: var(--text);
+  color: var(--white);
+}
+
+.projects-heading {
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-light);
+  margin-bottom: 64px;
+  margin-left: -35px;
+  opacity: 0.7;
+}
+.hero-name-block {
+  display: inline-block;     /* key line */
+  text-align: left;          /* aligns intro to H */
+}
+.hero-identity {
+  text-align: center; /* force subheading back to center */
+}
+.hero-intro {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-light);
+  letter-spacing: 1.5px;
+  transform: translateX(5px);
+  margin-bottom: 12px;
+}
+
+
+  </style>
+</head>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.project-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+        const isOpen = content.classList.contains('open');
+
+        content.classList.toggle('open');
+
+        button.textContent = isOpen
+          ? 'View more'
+          : 'Click to collapse';
+      });
+    });
+  });
+</script>
+
+
+
+<body>
+  <!-- HERO - SILENCE -->
+  <section class="hero">
+    <div class="hero-name-block">
+    <p class="hero-intro">Hey, I'm</p>
+    <h1 class="hero-statement">Himanshu Yadav</h1>
+    </div>
+    <p class="hero-identity">Engineer · Builder · Thinker</p>
+  </section>
+
+  <!-- ABOUT - THE WHY -->
+  <section class="about-section">
+    <div class="about-container">
+      <div>
+        <h2 class="section-title">About</h2>
+        <div class="section-content">
+          <p>I believe technology should feel inevitable,  simple on the surface, powerful underneath.</p>
+            <p>I like building things and understanding how they work under the hood.</p>
+            <p>I focus on writing clean code, learning from mistakes, and improving my skills with every project I work on.</p>
+          <a href="assets/resume/Himanshu_Yadav_Resume.pdf" class="resume-btn" target="_blank" rel="noopener noreferrer">View Resume</a>
+        </div>
+      </div>
+
+      <div class="education-sidebar">
+        <h3>Education</h3>
+        <h4>B.Tech Computer Science & Engineering</h4>
+        <p>Expected 2027</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS - THE HEART -->
+  <section class="projects-section">
+    <div class="projects-container">
+      <h2 class="projects-heading">Projects</h2>
+
+        <div class="project">
+
+        <h2 class="project-title">MeetSync</h2>
+        <p class="project-philosophy">A system that removes friction from meetings.</p>
+
+        <button class="project-toggle">
+            View more
+        </button>
+
+        <div class="project-content">
+            <div class="project-details">
+
+            <div class="project-detail">
+                <h4>The Problem</h4>
+                <p>Meetings generate information, but clarity is lost.</p>
+            </div>
+
+            <div class="project-detail">
+                <h4>The Idea</h4>
+                <p>Extract structure, intent, and outcomes using language models.</p>
+            </div>
+
+            <div class="project-detail">
+                <h4>The Execution</h4>
+                <p>Speech → text → reasoning → structured summaries.</p>
+            </div>
+
+            <div class="project-detail">
+                <h4>The Outcome</h4>
+                <p>Clear decisions, fewer follow-ups, less cognitive load.</p>
+            </div>
+
+            </div>
+
+            <p class="project-tech">
+            Built with Flask, Deepgram, and Transformers
+            </p>
+
+            <div class="project-actions">
+            <a href="https://meetsync-8x1f.onrender.com/" class="project-btn live-btn">Live</a>
+            <a href="https://github.com/Himanshu-2678/MeetSync" class="project-btn github-btn">GitHub</a>
+            </div>
+        </div>
+
+        </div>
+
+
+<div class="project">
+
+  <h2 class="project-title">Early Churn Intelligence</h2>
+  <p class="project-philosophy">Understanding users before they leave.</p>
+
+  <button class="project-toggle">
+    View more
+  </button>
+
+  <div class="project-content">
+    <div class="project-details">
+
+      <div class="project-detail">
+        <h4>The Problem</h4>
+        <p>Companies lose customers but rarely know why. By the time churn is obvious, it’s too late.</p>
+      </div>
+
+      <div class="project-detail">
+        <h4>The Idea</h4>
+        <p>Behavior tells a story before words do. Patterns reveal intent. Prediction enables prevention.</p>
+      </div>
+
+      <div class="project-detail">
+        <h4>The Execution</h4>
+        <p>Behavioral analysis pipelines identify early risk signals and translate them into actions.</p>
+      </div>
+
+      <div class="project-detail">
+        <h4>The Outcome</h4>
+        <p>Teams intervene earlier. Retention improves. Decisions become data-informed.</p>
+      </div>
+
+    </div>
+
+    <p class="project-tech">
+      Built with Python, PostgreSQL, and Docker
+    </p>
+
+    <div class="project-actions">
+      <a href="#" class="project-btn live-btn">Live</a>
+      <a href="#" class="project-btn github-btn">GitHub</a>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="project">
+
+  <h2 class="project-title">Decision Intelligence Engine</h2>
+  <p class="project-philosophy">Translating predictions into actions.</p>
+
+  <button class="project-toggle">
+    View more
+  </button>
+
+  <div class="project-content">
+    <div class="project-details">
+
+      <div class="project-detail">
+        <h4>The Problem</h4>
+        <p>Models predict outcomes, but predictions alone don’t drive decisions.</p>
+      </div>
+
+      <div class="project-detail">
+        <h4>The Idea</h4>
+        <p>Decisions need context, constraints, and intent—not just probabilities.</p>
+      </div>
+
+      <div class="project-detail">
+        <h4>The Execution</h4>
+        <p>Combined model outputs with business rules and contextual logic.</p>
+      </div>
+
+      <div class="project-detail">
+        <h4>The Outcome</h4>
+        <p>Predictions become recommendations. Intelligence becomes actionable.</p>
+      </div>
+
+    </div>
+
+    <p class="project-tech">
+      Built with Python and LLMs
+    </p>
+
+    <div class="project-actions">
+      <a href="#" class="project-btn live-btn">Live</a>
+      <a href="#" class="project-btn github-btn">GitHub</a>
+    </div>
+  </div>
+
+</div>
+
+
+    </div>
+  </section>
+
+  <!-- WRITING - POINT OF VIEW -->
+  <section class="writing-section">
+    <div class="writing-container">
+      <h2 class="section-title">Writing</h2>
+      
+      <div class="writing-item">
+        <a href="https://medium.com/@radhekrishna8267/meetsync-practical-ai-engineering-with-deepgram-transformers-and-flask-6eb4112e1430" target="_blank">
+          <h3 class="writing-title">MeetSync: Practical AI Engineering</h3>
+          <p class="writing-excerpt">How I built an end-to-end AI meeting minutes system, focusing on deployment constraints and real-world trade-offs.</p>
+        </a>
+      </div>
+
+      <div class="writing-item">
+        <a href="https://medium.com/@radhekrishna8267/energy-consumption-forecasting-my-first-project-3c855e9d5921" target="_blank">
+          <h3 class="writing-title">Energy Consumption Forecasting</h3>
+          <p class="writing-excerpt">A walkthrough of my first ML project: forecasting energy consumption using time-series data and model development.</p>
+        </a>
+      </div>
+
+      <div class="writing-item">
+        <a href="https://medium.com/@radhekrishna8267/main-challenges-to-machine-learning-a53b85020cb2" target="_blank">
+          <h3 class="writing-title">Main Challenges to Machine Learning</h3>
+          <p class="writing-excerpt">An exploration of the key challenges in machine learning, from data quality to model interpretability and deployment.</p>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT - QUIET CONFIDENCE -->
+  <section class="contact-section">
+    <p class="contact-message">I'm open to discussing AI/ML engineering projects, collaborations, and job opportunities. Feel free to reach out!</p>
+    
+    <div class="contact-email-wrapper">
+      <p><strong>Email:</strong>
+      <a href="mailto:radhekrishna8267@gmail.com" class="contact-email">radhekrishna8267@gmail.com</a></p>
+    </div>
+
+    <div class="contact-buttons">
+      <a href="https://github.com/Himanshu-2678" target="_blank" class="contact-btn">GitHub</a>
+      <a href="https://www.linkedin.com/in/himanshuy26/" target="_blank" class="contact-btn">LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2026 Himanshu Yadav</p>
+  </footer>
+
+</body>
+</html>
