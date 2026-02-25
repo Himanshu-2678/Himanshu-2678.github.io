@@ -10,7 +10,7 @@
        ========================================================= */
     :root {
       --white: #ffffff;
-      --off-white: #fafafa;
+      --off-white: #f1f3f5;
       --text: #1a1a1a;
       --text-light: #666666;
       --border: #e5e5e5;
@@ -47,11 +47,16 @@
     padding: 40px;
     position: relative;
     overflow: hidden;
+    background: linear-gradient(
+      180deg,
+      #0f0f0f 0%,
+      #161616 100%
+      );
     }
 
 
     .hero-statement {
-      font-size: 190px;
+      font-size: clamp(64px, 14vw, 160px);
       font-weight: 300;
       letter-spacing: -1.5px;
       color: var(--text);
@@ -66,28 +71,6 @@
       color: var(--text-light);
       letter-spacing: 2px;
       text-transform: uppercase;
-    }
-
-    .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;   
-    background-image: url("assets/images/Maija-Holma.png");
-    background-size: cover;
-    background-position: center;
-    filter: blur(8px);
-    transform: scale(1.1); /* prevents blur edges */
-    z-index: 0;
-    }
-
-    .hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background: rgba(0, 0, 0, 0.6); /* THIS is the key */
-
-    z-index: 1;
     }
 
     .hero > * {
@@ -322,6 +305,11 @@
     .writing-container {
       max-width: 800px;
       margin: 0 auto;
+      position: relative;
+    }
+
+    .writing-container .section-title {
+      margin-left: -35px;
     }
 
     .writing-item {
@@ -426,41 +414,16 @@
        FOOTER
        ========================================================= */
     .footer {
-    position: relative;
-    padding: 20px;
-    text-align: center;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.7);
-    overflow: hidden;
-    }
-
-    .footer::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background-image: url("assets/images/Maija-Holma.png");
-    background-size: cover;
-    background-position: center 55%;
-
-    z-index: 0;
-    }
-
-    .footer::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background: rgba(0, 0, 0, 0.8); /* strong overlay for footer */
-
-    z-index: 1;
+      background: #1a1a1a;
+      padding: 24px;
+      text-align: center;
+      font-size: 13px;                 /* increased from 12px */
+      color: rgba(255, 255, 255, 0.65);
     }
 
     .footer p {
-    position: relative;
-    z-index: 2;
+      letter-spacing: 0.4px;
     }
-
 
     /* =========================================================
        RESPONSIVE
@@ -548,7 +511,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-light);
   text-align: center;
   font-style: italic;
@@ -590,6 +553,24 @@
   margin-left: -35px;
   opacity: 0.7;
 }
+
+.contact-heading {
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-light);
+  margin-bottom: 48px;
+  margin-left: -35px;
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .contact-heading {
+    margin-left: 0;
+  }
+}
+
 .hero-name-block {
   display: inline-block;     /* key line */
   text-align: left;          /* aligns intro to H */
@@ -607,6 +588,11 @@
   padding-left: 8px;
 }
 
+@media (max-width: 768px) {
+  .writing-container .section-title {
+    margin-left: 0;
+  }
+}
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -700,7 +686,7 @@
     <p class="hero-intro">Hey, I'm</p>
     <h1 class="hero-statement">Himanshu Yadav</h1>
     </div>
-    <p class="hero-identity">Engineer · Problem Solver · Learner</p>
+    <p class="hero-identity">Engineer · Applied AI · ML Systems</p>
   </section>
 
   <!-- ABOUT - THE WHY -->
@@ -709,19 +695,13 @@
       <div>
         <h2 class="section-title">About</h2>
         <div class="section-content">
-          <p>
-          I’m a third-year computer science student who enjoys building things and understanding how they work beyond the surface.
-          </p>
+        <p>
+        I’m a third-year computer science student who enjoys building things and understanding how they work beyond the surface.
+        </p>
 
-          <p>
-          I mostly learn by working on small to medium projects, breaking ideas down, fixing mistakes,
-          and figuring out why a solution works instead of just making it run.
-          </p>
-
-          <p>
-          Right now, I’m exploring applied AI and machine learning systems,
-          especially how models move from experiments to real applications and what challenges appear after deployment.
-          </p>
+        <p>
+        I learn by building projects—breaking ideas down, fixing mistakes, and exploring applied AI and machine learning systems in real-world contexts.
+        </p>
           <a href="assets/resume/Himanshu_Yadav_Resume.pdf" class="resume-btn" target="_blank" rel="noopener noreferrer">View Resume</a>
         </div>
       </div>
@@ -821,38 +801,41 @@
     </div>
 
     <!-- 2×2 Grid -->
-    <div class="project-details">
+  <div class="project-details">
 
-      <div class="project-detail">
-        <h4>The Problem</h4>
-        <p>
-          Companies lose customers but rarely know why. By the time churn is obvious, it’s too late.
-        </p>
-      </div>
-
-      <div class="project-detail">
-        <h4>The Idea</h4>
-        <p>
-          Behavior tells a story before words do. Patterns reveal intent. Prediction enables prevention.
-        </p>
-      </div>
-
-      <div class="project-detail">
-        <h4>The Execution</h4>
-        <p>
-          Behavioral analysis pipelines identify early risk signals and translate them into actions.
-        </p>
-      </div>
-
-      <div class="project-detail">
-        <h4>The Outcome</h4>
-        <p>
-          Teams intervene earlier. Decisions become data-informed.
-        </p>
-      </div>
-
+    <div class="project-detail">
+      <h4>The Problem</h4>
+      <p>
+        Churn is usually identified after users leave, making it hard to understand which behavioral
+        signals indicated risk earlier.
+      </p>
     </div>
 
+    <div class="project-detail">
+      <h4>The Idea</h4>
+      <p>
+        Model churn risk by analyzing how user activity patterns change over time instead of relying
+        on final churn events alone.
+      </p>
+    </div>
+
+    <div class="project-detail">
+      <h4>The Execution</h4>
+      <p>
+        Built a behavioral data pipeline, engineered features, and trained baseline models to estimate
+        early churn risk under practical constraints.
+      </p>
+    </div>
+
+    <div class="project-detail">
+      <h4>The Outcome</h4>
+      <p>
+        Gained a clearer understanding of how ML systems behave in practice, including feature design,
+        evaluation trade-offs, and system limitations.
+      </p>
+    </div>
+
+  </div>
     <!-- Tech stack -->
     <p class="project-tech">
       Built with Python, PostgreSQL, and Logistic Regression
@@ -954,8 +937,10 @@
     </div>
   </section>
 
-  <!-- CONTACT - QUIET CONFIDENCE -->
+  <!-- CONTACT -->
+
   <section class="contact-section">
+    <h2 class="section-heading">Contact</h2>
     <p class="contact-message">I'm open to discussing AI/ML engineering projects, collaborations, and job opportunities. Feel free to reach out!</p>
     
     <div class="contact-email-wrapper">
