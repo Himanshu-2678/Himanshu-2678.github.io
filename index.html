@@ -10,10 +10,11 @@
        ========================================================= */
     :root {
       --white: #ffffff;
-      --off-white: #f8f9fa;
-      --text: #1a1a1a;
-      --text-light: #666666;
-      --border: #e5e5e5;
+      --surface-1: #f7f7f8;
+      --surface-2: #f2f2f4;
+      --text: #111111;
+      --text-light: #6e6e73;
+      --border: #e6e6e8;
       --accent: #0066cc;
     }
 
@@ -47,11 +48,7 @@
     padding: 40px;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(
-      180deg,
-      #0f0f0f 0%,
-      #161616 100%
-      );
+    background: #ffffff;
     }
 
 
@@ -59,7 +56,7 @@
       font-size: clamp(64px, 12vw, 160px);
       font-weight: 300;
       letter-spacing: -1.5px;
-      color: var(--text);
+      color: #111111;
       margin-bottom: 32px;
       text-align: center;
       line-height: 1.2;
@@ -68,7 +65,7 @@
     .hero-identity {
       font-size: 18px;
       font-weight: 400;
-      color: var(--text-light);
+      color: #6e6e73;
       letter-spacing: 2px;
       text-transform: uppercase;
     }
@@ -76,15 +73,6 @@
     .hero > * {
     position: relative;
     z-index: 2;
-    }
-
-
-    .hero-statement {
-    color: #ffffff;
-    }
-
-    .hero-identity {
-    color: rgba(255, 255, 255, 0.7);
     }
 
     /* Faster replay when returning to hero */
@@ -109,7 +97,7 @@
        ABOUT - THE WHY
        ========================================================= */
     .about-section {
-      background: var(--off-white);
+      background: var(--surface-1);
       padding: 120px 40px;
     }
 
@@ -298,7 +286,7 @@
        WRITING - POINT OF VIEW
        ========================================================= */
     .writing-section {
-      background: var(--off-white);
+      background: var(--surface-1);
       padding: 120px 40px;
     }
 
@@ -414,7 +402,7 @@
        FOOTER
        ========================================================= */
     .footer {
-      background: #1a1a1a;
+      background: #111111;
       padding: 24px;
       text-align: center;
       font-size: 13px;                 /* increased from 12px */
@@ -584,7 +572,7 @@
 .hero-intro {
   font-size: 20px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.90);
+  color: #3a3a3a;
   letter-spacing: 1.5px;
   transform: translateX(5px);
   margin-bottom: 10px;
@@ -781,6 +769,63 @@
 
 </div> <!-- END project -->
 
+
+<!-- Project 2 -->
+<div class="project">
+
+  <h2 class="project-title">Memoria</h2>
+  <p class="project-philosophy">Giving stateless AI assistants long-term conversational memory.</p>
+
+  <button class="project-toggle">
+    View more
+  </button>
+
+  <div class="project-content">
+
+    <!-- PROJECT IMAGE -->
+    <div class="project-media">
+      <img 
+        src="assets/images/memoria_architecture.PNG" 
+        alt="Memoria system architecture"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="project-details">
+
+      <div class="project-detail">
+        <h4>The Problem</h4>
+        <p>LLMs are stateless and cannot remember past conversations.</p>
+      </div>
+
+      <div class="project-detail">
+        <h4>The Idea</h4>
+        <p>Add a persistent memory layer that stores and retrieves conversations using embeddings.</p>
+      </div>
+
+      <div class="project-detail">
+        <h4>The Execution</h4>
+        <p>Messages → embeddings → vector database → similarity retrieval → injected into the LLM prompt.</p>
+      </div>
+
+      <div class="project-detail">
+        <h4>The Outcome</h4>
+        <p>AI assistants gain long-term conversational memory and controllable forgetting.</p>
+      </div>
+
+    </div> <!-- END project-details -->
+
+    <p class="project-tech">
+      Built with Endee Vector Database, Sentence Transformers, Groq (Llama 3.3)
+    </p>
+
+    <div class="project-actions">
+      <a href="https://github.com/Himanshu-2678/memoria" class="project-btn github-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+
+  </div> <!-- END project-content -->
+
+</div> <!-- END project -->
 
 <!-- Project 2 -->
 <div class="project">
