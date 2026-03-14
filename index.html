@@ -334,6 +334,31 @@
       line-height: 1.6;
     }
 
+    .writing-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 64px;
+    }
+
+    .substack-link {
+      font-size: 14px;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .substack-link:hover {
+      opacity: 0.6;
+    }
+
+    @media (max-width: 768px) {
+      .writing-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+    }
     /* =========================================================
        CONTACT - QUIET CONFIDENCE
        ========================================================= */
@@ -959,10 +984,16 @@
   <!-- WRITING - POINT OF VIEW -->
   <section class="writing-section">
     <div class="writing-container">
-      <h2 class="section-title">Writing</h2>
-      
+      <div class="writing-header">
+        <h2 class="section-title" style="margin-bottom: 0;">Writing</h2>
+        <a href="https://substack.com/@himanshuyadav7" target="_blank" class="substack-link">
+          Read on Substack
+        </a>
+      </div>
+
+
       <div class="writing-item">
-        <a href="https://substack.com/home/post/p-189960679" target="_blank">
+        <a href="https://open.substack.com/pub/himanshuyadav7/p/the-myth-of-the-simple-ai-app?r=3wzp9h&utm_campaign=post&utm_medium=web" target="_blank">
           <h3 class="writing-title">The Myth of the "Simple AI App"</h3>
           <p class="writing-excerpt">Why building AI products often feels like 80% infrastructure and only 20% model.</p>
         </a>  
