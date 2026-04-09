@@ -471,7 +471,7 @@
     .contact-email-label {
       font-size: 17px;
       color: var(--text);
-      margin-right: 8px;
+      margin-right: 1px;
     }
 
     .contact-buttons {
@@ -743,6 +743,124 @@
     <div class="projects-container">
       <p class="projects-heading">Projects</p>
 
+      <!-- AegisAI -->
+      <div class="project reveal">
+        <h2 class="project-title">AegisAI</h2>
+        <p class="project-philosophy">A Self-Healing Orchestration Layer for Reliable LLM Systems</p>
+        <button class="project-toggle">View more</button>
+
+        <div class="project-content">
+
+          <div class="project-media">
+            <img src="assets/images/architecture_diagram_aegisAI.png"
+                alt="AegisAI system architecture" loading="lazy" />
+          </div>
+
+          <div class="project-details">
+
+            <div class="project-detail">
+              <h4>The Objective</h4>
+            <p>
+              Control-layer architecture with security filtering, RAG, adversarial multi-agent validation, and self-healing recovery loops.
+            </p>
+            </div>
+
+            <div class="project-detail">
+              <h4>The System</h4>
+              <p>
+                Multi-stage pipeline with input security, RAG, multi-agent validation,
+                and recovery orchestration with full observability.
+              </p>
+            </div>
+
+            <div class="project-detail">
+              <h4>Key Results</h4>
+              <ul>
+                <li>Reduced hallucination pass-through to ~5% and achieved 100% security block rate</li>
+                <li>Introduced multi-agent validation and self-healing recovery for reliable outputs</li>
+              </ul>
+            </div>
+
+            <div class="project-detail">
+              <h4>Core Insight</h4>
+              <p>
+                LLMs cannot be trusted as standalone systems — reliability requires
+                external control, validation, and failure-aware orchestration.
+              </p>
+            </div>
+
+          </div>
+
+          <p class="project-tech">
+            Built with Python, local LLMs (Ollama), agent-based validation, RAG pipeline, and observability tooling.
+          </p>
+
+          <div class="project-actions">
+            <a href="https://github.com/Himanshu-2678/aegisAI"
+              class="project-btn github-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+
+        </div>
+      </div>
+    
+      <!-- Transformer-from-scratch -->
+      <div class="project reveal">
+        <h2 class="project-title">Transformer From Scratch</h2>
+        <p class="project-philosophy">A Mechanistic Analysis of Attention in Transformers</p>
+        <button class="project-toggle">View more</button>
+
+        <div class="project-content">
+
+          <div class="project-media">
+            <img src="assets/images/transformer_architecture.png"
+                alt="Transformer architecture " loading="lazy" />
+          </div>
+
+          <div class="project-details">
+
+            <div class="project-detail">
+              <h4>The Objective</h4>
+            <p>
+              Analyze whether attention heads develop functional roles and quantify their importance using causal ablation.
+            </p>
+            </div>
+
+            <div class="project-detail">
+              <h4>The Method</h4>
+              <p>
+                Built a transformer from scratch and analyzed attention using entropy, positional patterns, and causal ablation.
+              </p>
+            </div>
+
+            <div class="project-detail">
+              <h4>Key Findings</h4>
+              <ul>
+                <li>Specialization is task-dependent and emerges primarily in early layers</li>
+                <li>Head importance is asymmetric. Identity heads act as critical bottlenecks</li>
+              </ul>
+            </div>
+
+            <div class="project-detail">
+              <h4>Core Insight</h4>
+              <p>
+                Transformer computation is not uniform. a small subset of heads carries most of the critical behavior.
+              </p>
+            </div>
+
+          </div>
+
+          <p class="project-tech">
+            Built from scratch in PyTorch with custom attention modules and a causal analysis pipeline.
+          </p>
+
+          <div class="project-actions">
+            <a href="https://github.com/Himanshu-2678" 
+              class="project-btn github-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+
+        </div>
+      </div>
+
       <!-- MeetSync -->
       <div class="project reveal">
         <h2 class="project-title">MeetSync</h2>
@@ -751,7 +869,7 @@
         <div class="project-content">
           <div class="project-media">
             <img src="assets/images/architecure_diagram_meetsync.png"
-                 alt="MeetSync system preview" loading="lazy" />
+                 alt="Transformer Architecture" loading="lazy" />
           </div>
           <div class="project-details">
             <div class="project-detail">
@@ -775,42 +893,6 @@
           <div class="project-actions">
             <a href="https://meetsync-ljni.onrender.com" class="project-btn live-btn">Live</a>
             <a href="https://github.com/Himanshu-2678/MeetSync"
-               class="project-btn github-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Memoria -->
-      <div class="project reveal">
-        <h2 class="project-title">Memoria</h2>
-        <p class="project-philosophy">Giving stateless AI assistants long-term conversational memory.</p>
-        <button class="project-toggle">View more</button>
-        <div class="project-content">
-          <div class="project-media">
-            <img src="assets/images/memoria_architecture.PNG"
-                 alt="Memoria system architecture" loading="lazy" />
-          </div>
-          <div class="project-details">
-            <div class="project-detail">
-              <h4>The Problem</h4>
-              <p>LLMs are stateless and cannot remember past conversations.</p>
-            </div>
-            <div class="project-detail">
-              <h4>The Idea</h4>
-              <p>Add a persistent memory layer that stores and retrieves conversations using embeddings.</p>
-            </div>
-            <div class="project-detail">
-              <h4>The Execution</h4>
-              <p>Messages → embeddings → vector database → similarity retrieval → injected into the LLM prompt.</p>
-            </div>
-            <div class="project-detail">
-              <h4>The Outcome</h4>
-              <p>AI assistants gain long-term conversational memory and controllable forgetting.</p>
-            </div>
-          </div>
-          <p class="project-tech">Built with Endee Vector Database, Sentence Transformers, Groq (Llama 3.3)</p>
-          <div class="project-actions">
-            <a href="https://github.com/Himanshu-2678/memoria"
                class="project-btn github-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </div>
