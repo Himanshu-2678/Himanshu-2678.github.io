@@ -3,522 +3,737 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Himanshu Yadav | Portfolio</title>
+  <title>Himanshu Yadav | ML Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
   <style>
-    /* =========================================================
-       ANTIGRAVITY COLOR SYSTEM
-       — Off-white base · Achromatic ramp · Periwinkle accent
-       ========================================================= */
+    /* =============================================
+       TOKENS — clean monochromatic palette
+       Light sections: near-white & warm grays
+       Dark sections: deep charcoal & near-black
+    ============================================= */
     :root {
-      /* Surfaces — cool off-white, exactly like antigravity.google */
-      --white:      #ffffff;
-      --surface-1:  #F7F7F9;   /* page bg / hero — slightly cool */
-      --surface-2:  #EBEBEB;   /* secondary buttons, input bg    */
-      --surface-3:  #E0E0E2;   /* hover states                   */
+      --ink-900: #0D0D0D;
+      --ink-800: #1A1A1A;
+      --ink-700: #2C2C2C;
+      --ink-500: #555555;
+      --ink-400: #777777;
+      --ink-300: #AAAAAA;
+      --ink-200: #CCCCCC;
+      --ink-100: #E8E6E1;
+      --ink-50:  #F4F2EE;
+      --ink-10:  #FAF9F7;
 
-      /* Text ramp — 3 stops, fully achromatic */
-      --text:        #111111;  /* headlines, primary             */
-      --text-mid:    #555555;  /* nav, body copy                 */
-      --text-light:  #999999;  /* captions, footer links         */
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans:  'DM Sans', system-ui, sans-serif;
 
-      /* Border */
-      --border:      #E0E0E2;
-
-      /* The ONE accent — periwinkle, used sparingly */
-      --accent:      #7B8FE8;  /* particles, email link, live btn */
-      --primary-action: #0066cc;
-
-      /* Dark surface — used in footer & dark hero strip */
-      --dark:        #111111;
+      --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+      --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-                   "Helvetica Neue", Arial, sans-serif;
-      background: var(--white);
-      color: var(--text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     html { scroll-behavior: smooth; }
 
-    /* =========================================================
-       HERO
-       ========================================================= */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-      /* Antigravity signature: off-white, NOT pure white */
-      background: var(--surface-1);
+    body {
+      font-family: var(--sans);
+      background: var(--ink-10);
+      color: var(--ink-800);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
     }
 
-    /* Antigravity particle dots — periwinkle, top-right */
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 22px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.35s var(--ease);
+    }
+
+    .navbar.scrolled {
+      background: rgba(250, 249, 247, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 14px 48px;
+      border-bottom: 1px solid var(--ink-100);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--ink-10);
+      opacity: 0;
+      transition: opacity 0.3s var(--ease), color 0.35s var(--ease);
+      letter-spacing: 0.2px;
+    }
+
+    .navbar.scrolled .nav-logo {
+      opacity: 1;
+      color: var(--ink-800);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.2s var(--ease), opacity 0.2s;
+    }
+
+    .navbar.scrolled .nav-links a {
+      color: var(--ink-400);
+    }
+
+    .nav-links a:hover {
+      color: rgba(255,255,255,0.95);
+    }
+
+    .navbar.scrolled .nav-links a:hover {
+      color: var(--ink-800);
+    }
+
+    .nav-hamburger {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      flex-direction: column; gap: 5px; padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block; width: 20px; height: 1.5px;
+      background: var(--ink-200);
+      transition: all 0.3s var(--ease);
+    }
+
+    .navbar.scrolled .nav-hamburger span {
+      background: var(--ink-700);
+    }
+
+    /* =============================================
+       HERO — dark
+    ============================================= */
+    .hero {
+      min-height: 100vh;
+      background: var(--ink-900);
+      color: var(--ink-10);
+      display: flex;
+      align-items: flex-end;
+      padding: 0 64px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle noise grain overlay */
     .hero::before {
       content: '';
       position: absolute;
-      top: 0; right: 0;
-      width: 420px;
-      height: 340px;
-      background-image:
-        radial-gradient(circle, var(--accent) 1.5px, transparent 1.5px);
-      background-size: 22px 22px;
-      mask-image: radial-gradient(ellipse 90% 80% at 80% 20%, black 30%, transparent 75%);
-      -webkit-mask-image: radial-gradient(ellipse 90% 80% at 80% 20%, black 30%, transparent 75%);
-      opacity: 0.45;
-      pointer-events: none;
-    }
-
-    /* Subtle noise texture — like Antigravity's grain */
-    .hero::after {
-      content: '';
-      position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      opacity: 0.6;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none;
+      opacity: 0.6;
     }
 
-    .hero > * { position: relative; z-index: 2; }
-
-    .hero-name-block {
-      display: inline-block;
-      text-align: left;
+    .hero-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
     }
 
-    .hero-intro {
-      font-size: 20px;
-      font-weight: 500;
-      color: var(--text-mid);
-      letter-spacing: 1.5px;
-      transform: translateX(5px);
-      margin-bottom: 10px;
-      padding-left: 8px;
-      opacity: 0;
-    }
-
-    .hero-statement {
-      font-size: clamp(64px, 12vw, 160px);
-      font-weight: 300;
-      letter-spacing: -1.5px;
-      color: var(--text);
-      margin-bottom: 32px;
-      text-align: center;
-      line-height: 1.2;
-      opacity: 0;
-    }
-
-    .hero-identity {
-      font-size: 18px;
-      font-weight: 400;
-      color: var(--text);
-      letter-spacing: 2px;
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      text-align: center;
-      opacity: 0;
+      color: var(--ink-300);
+      font-weight: 400;
+      margin-bottom: 28px;
     }
 
-    /* =========================================================
-       ABOUT
-       ========================================================= */
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(80px, 13vw, 168px);
+      line-height: 0.92;
+      letter-spacing: -4px;
+      color: var(--ink-10);
+      margin-bottom: 44px;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--ink-300);
+    }
+
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 40px;
+    }
+
+    .hero-desc {
+      max-width: 520px;
+      font-size: 18px;
+      line-height: 1.75;
+      font-weight: 300;
+      color: var(--ink-300);
+    }
+
+    .hero-meta {
+      text-align: right;
+      font-size: 12px;
+      color: var(--ink-400);
+      line-height: 2;
+      letter-spacing: 0.3px;
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       SECTION SHARED
+    ============================================= */
+    .section-label {
+      font-size: 15px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 56px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-label::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 48px;
+      background: currentColor;
+      opacity: 0.3;
+    }
+
+    /* =============================================
+       ABOUT — warm off-white
+    ============================================= */
     .about-section {
-      background: var(--white);
-      padding: 120px 40px;
+      background: var(--ink-50);
+      padding: 120px 64px;
     }
 
-    .about-container {
-      max-width: 1000px;
+    .about-inner {
+      max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1.5fr 1fr;
+      grid-template-columns: 1fr 260px;
       gap: 80px;
       align-items: start;
     }
 
-    .section-title {
-      font-size: 48px;
-      font-weight: 500;
-      letter-spacing: -1px;
-      margin-bottom: 32px;
-      color: var(--text);
+    .about-section .section-label {
+      color: var(--ink-400);
     }
 
-    .section-content {
-      font-size: 18px;
-      font-weight: 300;
-      line-height: 1.8;
-      color: var(--text);
+    .about-headline {
+      font-family: var(--serif);
+      font-size: clamp(38px, 4.5vw, 58px);
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      color: var(--ink-800);
+      margin-bottom: 36px;
+      max-width: 600px;
     }
 
-    .section-content p { margin-bottom: 32px; }
+    .about-headline em {
+      font-style: italic;
+      color: var(--ink-500);
+    }
 
-    /* Pill button — Antigravity primary style */
+    .about-body {
+      font-size: 17px;
+      line-height: 1.9;
+      color: var(--ink-600, #444);
+      font-weight: 350;
+      max-width: 580px;
+    }
+
+    .about-body p + p { margin-top: 22px; }
+
     .resume-btn {
-      display: inline-block;
-      margin-top: 24px;
-      padding: 12px 28px;
-      background: var(--text);        /* near-black */
-      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 36px;
+      padding: 13px 26px;
+      background: var(--ink-800);
+      color: var(--ink-10);
       text-decoration: none;
-      border-radius: 100px;           /* full pill */
-      font-size: 15px;
+      border-radius: 4px;
+      font-size: 12px;
       font-weight: 500;
-      letter-spacing: 0.2px;
-      transition: opacity 0.2s ease;
-    }
-
-    .resume-btn:hover { opacity: 0.75; }
-
-    .education-sidebar {
-      background: var(--surface-1);   /* off-white card */
-      padding: 40px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      margin-top: 20px;
-    }
-
-    .education-sidebar h3 {
-      font-size: 14px;
-      font-weight: 400;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--text-light);
+      transition: background 0.2s var(--ease), transform 0.2s var(--ease);
+    }
+
+    .resume-btn:hover {
+      background: var(--ink-700);
+      transform: translateY(-2px);
+    }
+
+    .edu-card {
+      background: var(--ink-10);
+      border: 1px solid var(--ink-100);
+      border-radius: 8px;
+      padding: 36px 32px;
+      margin-top: 4px;
+    }
+
+    .edu-card .card-label {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--ink-300);
       margin-bottom: 20px;
-      opacity: 0.7;
     }
 
-    .education-sidebar h4 {
-      font-size: 18px;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 8px;
-      line-height: 1.4;
-    }
-
-    .education-sidebar p {
-      font-size: 15px;
-      color: var(--text-mid);
-    }
-
-    /* =========================================================
-       PROJECTS
-       ========================================================= */
-    .projects-section {
-      padding: 120px 0;
-      background: var(--surface-1);   /* off-white bg */
-    }
-
-    .projects-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-
-    .projects-heading {
-      font-size: 20px;
+    .edu-card h4 {
+      font-family: var(--serif);
+      font-size: 22px;
+      line-height: 1.35;
+      color: var(--ink-800);
+      margin-bottom: 12px;
       font-weight: 400;
-      text-transform: uppercase;
+    }
+
+    .edu-card p {
+      font-size: 14px;
+      color: var(--ink-400);
+      line-height: 1.9;
+    }
+
+    .about-photo {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--ink-100);
+      margin-bottom: 16px;
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      filter: sepia(12%) contrast(1.02) brightness(0.97);
+    }
+
+    /* =============================================
+       PROJECTS — darker
+    ============================================= */
+    .projects-section {
+      background: var(--ink-800);
+      padding: 120px 64px;
+    }
+
+    .projects-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .projects-section .section-label {
+      color: var(--ink-400);
+    }
+
+    /* Project row */
+    .project-item {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 56px 0;
+    }
+
+    .project-item:last-child {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .project-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 32px;
+      cursor: pointer;
+    }
+
+    .project-number {
+      font-size: 11px;
       letter-spacing: 2px;
-      color: var(--text-light);
-      margin-bottom: 64px;
-      opacity: 0.7;
+      color: var(--ink-400);
+      font-weight: 400;
+      margin-bottom: 10px;
     }
 
-    .project {
-      margin-bottom: 120px;
-      padding-bottom: 80px;
-      border-bottom: 1px solid var(--border);
+    .project-name {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--ink-10);
+      font-weight: 400;
+      transition: color 0.2s var(--ease);
     }
 
-    .project:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
+    .project-item:hover .project-name {
+      color: var(--ink-200);
     }
 
-    .project-title {
-      font-size: 48px;
-      font-weight: 500;
-      letter-spacing: -1px;
-      margin-bottom: 24px;
-      color: var(--text);
-    }
-
-    .project-philosophy {
-      font-size: 24px;
+    .project-tagline {
+      font-size: 16px;
+      color: var(--ink-400);
       font-weight: 300;
-      color: var(--text-mid);
-      margin-bottom: 48px;
-      line-height: 1.6;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    .project-toggle-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 8px;
+      flex-shrink: 0;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .project-toggle-btn:hover {
+      border-color: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .toggle-icon {
+      width: 12px;
+      height: 12px;
+      position: relative;
+      transition: transform 0.35s var(--ease);
+    }
+
+    .toggle-icon::before,
+    .toggle-icon::after {
+      content: '';
+      position: absolute;
+      background: var(--ink-300);
+    }
+
+    .toggle-icon::before {
+      width: 12px; height: 1px;
+      top: 50%; left: 0;
+      transform: translateY(-50%);
+    }
+
+    .toggle-icon::after {
+      width: 1px; height: 12px;
+      left: 50%; top: 0;
+      transform: translateX(-50%);
+      transition: transform 0.3s var(--ease), opacity 0.3s;
+    }
+
+    .project-item.open .toggle-icon::after {
+      transform: translateX(-50%) rotate(90deg);
+      opacity: 0;
+    }
+
+    /* Expandable content */
+    .project-body {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.55s var(--ease), opacity 0.35s var(--ease);
+    }
+
+    .project-item.open .project-body {
+      max-height: 2000px;
+      opacity: 1;
+    }
+
+    .project-body-inner {
+      padding-top: 48px;
     }
 
     .project-media {
-      margin: 48px 0;
-      padding: 24px;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--ink-700);
+      margin-bottom: 48px;
+      border: 1px solid rgba(255,255,255,0.07);
     }
 
     .project-media img {
       width: 100%;
       height: auto;
       display: block;
-      border-radius: 6px;
     }
 
-    .project-details {
+    .project-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 56px 48px;
-      align-items: start;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px 48px;
+      margin-bottom: 36px;
     }
 
-    .project-detail { max-width: 420px; }
-
-    .project-detail h4 {
-      font-size: 14px;
-      font-weight: 500;
+    .project-cell h5 {
+      font-size: 10px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      letter-spacing: 1.6px;
-      color: var(--text-light);
-      margin-bottom: 14px;
-      opacity: 0.95;
-    }
-
-    .project-detail p {
-      font-size: 17px;
-      line-height: 1.7;
-      color: var(--text);
-    }
-
-    .project-tech {
-      margin-top: 48px;
-      font-size: 14px;
-      color: var(--text-light);
-      font-style: italic;
-    }
-
-    /* Toggle */
-    .project-content {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(-8px);
-      transition: max-height 0.6s ease, opacity 0.4s ease, transform 0.4s ease;
-      margin-top: 32px;
-    }
-
-    .project-content.open {
-      max-height: 2500px;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .project-toggle {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 15px;
-      color: var(--text-light);
-      font-style: italic;
-      margin-bottom: 16px;
-      transition: color 0.2s;
-    }
-
-    .project-toggle:hover { color: var(--text-mid); }
-
-    /* Action buttons — pill style */
-    .project-actions {
-      display: flex;
-      gap: 12px;
-      margin-top: 32px;
-    }
-
-    .project-btn {
-      padding: 10px 22px;
-      border-radius: 100px;           /* pill */
-      text-decoration: none;
-      font-size: 14px;
+      color: var(--ink-400);
       font-weight: 500;
-      transition: opacity 0.2s ease;
+      margin-bottom: 12px;
     }
 
-    .project-btn:hover { opacity: 0.75; }
-
-    /* Live → periwinkle (the ONE accent) */
-    .live-btn {
-      background: var(--primary-action);  
-      color: var(--white);
-    }
-    /* GitHub → near-black */
-    .github-btn {
-      background: var(--text);
-      color: var(--white);
+    .project-cell p,
+    .project-cell ul {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--ink-200);
+      font-weight: 300;
     }
 
-    /* =========================================================
-       WRITING
-       ========================================================= */
+    .project-cell ul {
+      padding-left: 16px;
+    }
+
+    .project-cell li { margin-bottom: 8px; }
+
+    .project-stack {
+      font-size: 12px;
+      color: var(--ink-400);
+      letter-spacing: 0.3px;
+      margin-bottom: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s var(--ease);
+    }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.07);
+      color: var(--ink-200);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .btn-solid {
+      background: var(--ink-10);
+      color: var(--ink-800);
+    }
+
+    .btn-solid:hover {
+      background: var(--ink-200);
+      transform: translateY(-1px);
+    }
+
+    /* =============================================
+       WRITING — light
+    ============================================= */
     .writing-section {
-      background: var(--white);
-      padding: 120px 40px;
+      background: var(--ink-10);
+      padding: 120px 64px;
     }
 
-    .writing-container {
-      max-width: 1000px;
+    .writing-inner {
+      max-width: 1200px;
       margin: 0 auto;
     }
 
-    .writing-header {
-      display: flex;
+    .writing-section .section-label {
+      color: var(--ink-400);
       justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 64px;
     }
 
-    .writing-header .section-title { margin-bottom: 0; }
+    .writing-section .section-label::after { display: none; }
 
     .substack-link {
-      font-size: 14px;
-      color: var(--text-light);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--ink-400);
       text-decoration: none;
-      transition: opacity 0.2s ease;
+      transition: color 0.2s;
     }
 
-    .substack-link:hover { opacity: 0.6; }
+    .substack-link:hover { color: var(--ink-800); }
+
+    .writing-list { border-top: 1px solid var(--ink-100); }
 
     .writing-item {
-      margin-bottom: 48px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--ink-100);
     }
-
-    .writing-item:last-child { border-bottom: none; }
 
     .writing-item a {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 32px;
+      padding: 40px 0;
       text-decoration: none;
       color: inherit;
-      display: block;
-      transition: opacity 0.2s ease;
+      transition: opacity 0.2s;
     }
 
-    .writing-item a:hover { opacity: 0.55; }
+    .writing-item a:hover { opacity: 0.72; }
+
+    .writing-item a:hover .writing-arrow {
+      transform: translate(3px, -3px);
+    }
 
     .writing-title {
-      font-size: 28px;
+      font-family: var(--serif);
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      color: var(--ink-800);
       font-weight: 400;
-      margin-bottom: 12px;
-      color: var(--text);
+      margin-bottom: 8px;
     }
 
     .writing-excerpt {
-      font-size: 17px;
-      color: var(--text-mid);
-      line-height: 1.6;
-    }
-
-    /* =========================================================
-       CONTACT
-       ========================================================= */
-    .contact-section {
-      background: var(--surface-1);
-      padding: 120px 40px;
-      text-align: center;
-    }
-
-    .contact-heading {
-      font-size: 20px;
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--text-light);
-      margin-bottom: 48px;
-      opacity: 0.7;
-    }
-
-    .contact-message {
-      font-size: 20px;
+      font-size: 15px;
+      color: var(--ink-400);
       font-weight: 300;
-      line-height: 1.7;
-      color: var(--text);
-      margin-bottom: 48px;
-      max-width: 680px;
-      margin-left: auto;
-      margin-right: auto;
+      line-height: 1.6;
+      max-width: 600px;
     }
 
-    .contact-email-wrapper { margin-bottom: 32px; }
+    .writing-arrow {
+      font-size: 20px;
+      color: var(--ink-300);
+      flex-shrink: 0;
+      transition: transform 0.2s var(--ease);
+    }
 
+    /* =============================================
+       CONTACT — darkest
+    ============================================= */
+    .contact-section {
+      background: var(--ink-900);
+      padding: 140px 64px;
+    }
 
-    /* Periwinkle for email — the accent earns its spot here */
+    .contact-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 100px;
+      align-items: start;
+    }
+
+    .contact-section .section-label {
+      color: var(--ink-500);
+    }
+
+    .contact-headline {
+      font-family: var(--serif);
+      font-size: clamp(42px, 5.5vw, 68px);
+      line-height: 1.1;
+      letter-spacing: -2px;
+      color: var(--ink-10);
+      font-weight: 400;
+      margin-top: 0;
+    }
+
+    .contact-headline em {
+      font-style: italic;
+      color: var(--ink-400);
+    }
+
+    .contact-desc {
+      font-size: 17px;
+      color: var(--ink-400);
+      line-height: 1.9;
+      font-weight: 300;
+      margin-bottom: 40px;
+    }
+
     .contact-email {
-      font-size: 17px;
-      color: #0066cc;
+      display: block;
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--ink-200);
       text-decoration: none;
-      transition: opacity 0.2s ease;
+      margin-bottom: 40px;
+      letter-spacing: -0.3px;
+      transition: color 0.2s;
     }
 
-    .contact-email:hover { opacity: 0.65; }
+    .contact-email:hover { color: var(--ink-10); }
 
-    .contact-email-label {
-      font-size: 17px;
-      color: var(--text);
-      margin-right: 1px;
-    }
-
-    .contact-buttons {
+    .contact-socials {
       display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin-top: 32px;
+      gap: 10px;
     }
 
-    /* Pill contact buttons */
-    .contact-btn {
-      padding: 12px 28px;
-      background: var(--text);        /* near-black pill */
-      color: var(--white);
-      text-decoration: none;
-      border-radius: 100px;
-      font-size: 14px;
-      font-weight: 500;
-      transition: opacity 0.2s ease;
-    }
-
-    .contact-btn:hover { opacity: 0.75; }
-
-    /* =========================================================
-       FOOTER — dark strip, Antigravity style
-       ========================================================= */
+    /* =============================================
+       FOOTER
+    ============================================= */
     .footer {
-      background: var(--dark);
-      padding: 14px 40px;
+      background: var(--ink-900);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 64px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
     }
 
     .footer-copy {
-      font-size: 12px;
-      color: rgba(255,255,255,0.35);
+      font-size: 11px;
+      color: var(--ink-500);
+      letter-spacing: 0.5px;
     }
 
-
-    /* =========================================================
+    /* =============================================
        REVEAL ANIMATION
-       ========================================================= */
+    ============================================= */
     .reveal {
       opacity: 0;
-      transform: translateY(12px);
-      transition: all 0.6s ease;
+      transform: translateY(16px);
+      transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
     }
 
     .reveal.visible {
@@ -526,171 +741,211 @@
       transform: translateY(0);
     }
 
-    /* =========================================================
-       HERO ANIMATIONS
-       ========================================================= */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 900px) {
+      .hero { padding: 0 32px 64px; }
+      .about-section,
+      .projects-section,
+      .writing-section,
+      .contact-section { padding: 88px 32px; }
+      .footer { padding: 20px 32px; }
+
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 56px; }
+      .project-grid { grid-template-columns: 1fr; gap: 28px; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; }
+      .hero-meta { text-align: left; }
     }
 
-    .hero.animate .hero-intro {
-      animation: fadeUp 0.6s ease-out forwards;
-      animation-delay: 0.1s;
-    }
-
-    .hero.animate .hero-statement {
-      animation: fadeUp 2.2s ease-out forwards;
-      animation-delay: 0.65s;
-    }
-
-    @keyframes fadeUpDim {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 0.45; transform: translateY(0); }
-    }
-
-    .hero.animate .hero-identity {
-      animation: fadeUpDim 1.9s ease-out forwards;
-      animation-delay: 1.2s;
-    }
-
-    .hero.fast.animate .hero-intro    { animation-duration: 0.25s; animation-delay: 0s; }
-    .hero.fast.animate .hero-statement { animation-duration: 0.35s; animation-delay: 0.05s; }
-    .hero.fast.animate .hero-identity  { animation-duration: 0.35s; animation-delay: 0.1s; }
-
-    /* =========================================================
-      NAVBAR
-      ========================================================= */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.4s ease, backdrop-filter 0.4s ease, padding 0.3s ease;
-    }
-
-    .navbar.scrolled {
-      background: rgba(247, 247, 249, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 14px 40px;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-
-    .nav-name {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      letter-spacing: 0.3px;
-    }
-
-    .navbar.scrolled .nav-name {
-      opacity: 1;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 13px;          /* keep smallish, it's a nav */
-      font-weight: 400;         /* was 600 → match heading */
-      text-transform: uppercase;
-      letter-spacing: 2px;      /* was 1.8px → match heading */
-      color: var(--text-light);
-      opacity: 0.7;             /* add this → match heading */
-      text-decoration: none;
-      transition: color 0.2s ease, opacity 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-      opacity: 1;               /* full opacity on hover */
-    }
-
-    /* Mobile */
-    .nav-hamburger {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      flex-direction: column;
-      gap: 5px;
-      padding: 4px;
-    }
-
-    .nav-hamburger span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--text);
-      transition: all 0.3s ease;
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        gap: 0;
-        background: rgba(247, 247, 249, 0.97);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--border);
-        padding: 8px 0;
-      }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
 
       .nav-links.open {
         display: flex;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: rgba(250,249,247,0.97);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--ink-100);
       }
 
-      .nav-links li a {
+      .nav-links.open li a {
         display: block;
-        padding: 14px 40px;
+        padding: 14px 32px;
+        color: var(--ink-500);
       }
 
-      .nav-hamburger {
-        display: flex;
-      }
+      .hero-name { letter-spacing: -2px; }
+      .project-header { grid-template-columns: 1fr; }
+      .project-toggle-btn { display: none; }
     }
-    /* =========================================================
-       RESPONSIVE
-       ========================================================= */
-    @media (max-width: 768px) {
-      .hero-statement  { font-size: 48px; }
-      .hero-identity   { font-size: 14px; }
-      .about-container { grid-template-columns: 1fr; gap: 48px; }
-      .section-title   { font-size: 36px; }
-      .project-title   { font-size: 36px; }
-      .project-philosophy { font-size: 20px; }
-      .project-details { grid-template-columns: 1fr; gap: 32px; }
-      .project-media   { padding: 16px; margin: 32px 0; }
-      .writing-title   { font-size: 24px; }
-      .writing-header  { flex-direction: column; gap: 6px; }
-      .contact-message { font-size: 18px; }
-      .contact-buttons { flex-direction: column; align-items: center; }
-      .contact-btn     { width: 200px; text-align: center; }
-      .footer          { flex-direction: column; gap: 10px; text-align: center; }
-      .footer-dots     { justify-content: center; }
+
+    @media (max-width: 640px) {
+
+      .navbar {
+        padding: 18px 20px;
+      }
+
+      .navbar.scrolled {
+        padding: 14px 20px;
+      }
+
+      .hero {
+        min-height: 100svh;
+        padding: 0 20px 48px;
+      }
+
+      .hero-name {
+        font-size: 72px;
+        line-height: 0.95;
+        letter-spacing: -2px;
+        margin-bottom: 28px;
+      }
+
+      .hero-eyebrow {
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+      }
+
+      .hero-desc {
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .hero-meta {
+        margin-top: 20px;
+        font-size: 11px;
+        line-height: 1.9;
+      }
+
+      .about-section,
+      .projects-section,
+      .writing-section,
+      .contact-section {
+        padding: 72px 20px;
+      }
+
+      .section-label {
+        margin-bottom: 36px;
+      }
+
+      .about-body {
+        font-size: 16px;
+        line-height: 1.85;
+      }
+
+      .about-photo img {
+        height: 240px;
+      }
+
+      .edu-card {
+        padding: 28px 24px;
+      }
+
+      .project-item {
+        padding: 40px 0;
+      }
+
+      .project-name {
+        font-size: 34px;
+        line-height: 1.15;
+      }
+
+      .project-tagline {
+        font-size: 15px;
+        margin-top: 10px;
+      }
+
+      .project-body-inner {
+        padding-top: 32px;
+      }
+
+      .project-media {
+        margin-bottom: 32px;
+      }
+
+      .project-cell p,
+      .project-cell ul {
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .project-links {
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .writing-item a {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 32px 0;
+      }
+
+      .writing-arrow {
+        display: none;
+      }
+
+      .writing-title {
+        font-size: 26px;
+      }
+
+      .writing-excerpt {
+        font-size: 14px;
+      }
+
+      .contact-headline {
+        font-size: 42px;
+        line-height: 1.15;
+      }
+
+      .contact-desc {
+        font-size: 15px;
+        line-height: 1.8;
+      }
+
+      .contact-email {
+        font-size: 18px;
+        word-break: break-word;
+      }
+
+      .contact-socials {
+        flex-wrap: wrap;
+      }
+
+      .contact-socials .btn {
+        width: auto;
+      }
+
+      .footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 20px;
+      }
+
     }
   </style>
 </head>
 
 <body>
+
+  <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
-    <span class="nav-name">Himanshu Yadav</span>
+    <span class="nav-logo">Himanshu Yadav</span>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
@@ -701,239 +956,296 @@
       <span></span><span></span><span></span>
     </button>
   </nav>
+
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-name-block">
-      <p class="hero-intro">Hey, I'm</p>
-      <h1 class="hero-statement">Himanshu Yadav</h1>
+    <div class="hero-inner">
+      <p class="hero-eyebrow reveal">AI / ML Engineer</p>
+      <h1 class="hero-name reveal reveal-delay-1">
+        Himanshu<br /><em>Yadav</em>
+      </h1>
+      <div class="hero-bottom">
+        <p class="hero-desc reveal reveal-delay-2">
+          Building practical machine learning systems
+        </p>
+        <div class="hero-meta reveal reveal-delay-3">
+          <div>UTC +05:30</div>
+          <div>Based in India</div>
+          <div>Open to ML/AI internships</div>
+        </div>
+      </div>
     </div>
-    <p class="hero-identity">Turning AI/ML models into working systems</p>
   </section>
 
   <!-- ABOUT -->
   <section class="about-section" id="about">
-    <div class="about-container">
-      <div class="reveal">
-        <h2 class="section-title">About</h2>
-        <div class="section-content">
+    <div class="about-inner">
+      <div>
+        <p class="section-label reveal">About</p>
+
+        <div class="about-body reveal reveal-delay-1">
           <p>
-            I'm a third-year computer science student who enjoys building things and
-            understanding how they work beyond the surface.
+            I'm a pre-final year computer science student focused on machine learning systems
+            and applied AI engineering.
           </p>
+
           <p>
-            I learn by building projects, breaking ideas down, fixing mistakes, and
-            exploring applied AI and machine learning systems in real-world contexts.
+            Most of my work involves building systems around models - inference pipelines,
+            monitoring, orchestration, observability, and reliability.
           </p>
-          <a href="assets/resume/Himanshu_Yadav_Resume.pdf" class="resume-btn"
-             target="_blank" rel="noopener noreferrer">View Resume</a>
+
+          <p>
+            I enjoy understanding how systems behave under real-world constraints and
+            exploring how machine learning works beyond isolated experimentation.
+          </p>
+
+          <a href="assets/resume/Himanshu_Yadav_Resume.pdf"
+            class="resume-btn"
+            target="_blank"
+            rel="noopener noreferrer">
+            View Résumé ↗
+          </a>
         </div>
       </div>
-
-      <div class="education-sidebar reveal">
-        <h3>Education</h3>
-        <h4>B.Tech in Computer Science &amp; Engineering</h4>
-        <p>Galgotias University</p>
-        <p>2023–2027</p>
+      <div class="reveal reveal-delay-2">
+        <div class="about-photo">
+          <img src="assets/images/myself2.jpeg" alt="Himanshu Yadav" />
+        </div>
+        <div class="edu-card">
+          <p class="card-label">Education</p>
+          <h4>B.Tech in Computer Science &amp; Engineering</h4>
+          <p>Galgotias University</p>
+          <p>2023 – 2027</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- PROJECTS -->
   <section class="projects-section" id="projects">
-    <div class="projects-container">
-      <p class="projects-heading">Projects</p>
+    <div class="projects-inner">
+      <p class="section-label reveal">My Selected Work</p>
 
-      <!-- AegisAI -->
-      <div class="project reveal">
-        <h2 class="project-title">AegisAI</h2>
-        <p class="project-philosophy">A Self-Healing Orchestration Layer for Reliable LLM Systems</p>
-        <button class="project-toggle">View more</button>
-
-        <div class="project-content">
-
-          <div class="project-media">
-            <img src="assets/images/architecture_diagram_aegisAI.png"
-                alt="AegisAI system architecture" loading="lazy" />
+      <!-- 1 — RealSignal -->
+      <div class="project-item reveal">
+        <div class="project-header">
+          <div>
+            <p class="project-number">01</p>
+            <h2 class="project-name">RealSignal</h2>
+            <p class="project-tagline">Real-time ML system for adaptive fraud monitoring and drift-aware inference</p>
           </div>
-
-          <div class="project-details">
-
-            <div class="project-detail">
-              <h4>The Objective</h4>
-            <p>
-              Control-layer architecture with security filtering, RAG, adversarial multi-agent validation, and self-healing recovery loops.
-            </p>
-            </div>
-
-            <div class="project-detail">
-              <h4>The System</h4>
-              <p>
-                Multi-stage pipeline with input security, RAG, multi-agent validation,
-                and recovery orchestration with full observability.
-              </p>
-            </div>
-
-            <div class="project-detail">
-              <h4>Key Results</h4>
-              <ul>
-                <li>Reduced hallucination pass-through to ~5% and achieved 100% security block rate</li>
-                <li>Introduced multi-agent validation and self-healing recovery for reliable outputs</li>
-              </ul>
-            </div>
-
-            <div class="project-detail">
-              <h4>Core Insight</h4>
-              <p>
-                LLMs cannot be trusted as standalone systems — reliability requires
-                external control, validation, and failure-aware orchestration.
-              </p>
-            </div>
-
-          </div>
-
-          <p class="project-tech">
-            Built with Python, local LLMs (Ollama), agent-based validation, RAG pipeline, and observability tooling.
-          </p>
-
-          <div class="project-actions">
-            <a href="https://github.com/Himanshu-2678/aegisAI"
-              class="project-btn github-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-
+          <button class="project-toggle-btn" aria-label="Expand project">
+            <span class="toggle-icon"></span>
+          </button>
         </div>
-      </div>
-    
-      <!-- Transformer-from-scratch -->
-      <div class="project reveal">
-        <h2 class="project-title">Transformer From Scratch</h2>
-        <p class="project-philosophy">A Mechanistic Analysis of Attention in Transformers</p>
-        <button class="project-toggle">View more</button>
-
-        <div class="project-content">
-
-          <div class="project-media">
-            <img src="assets/images/transformer_architecture.png"
-                alt="Transformer architecture " loading="lazy" />
-          </div>
-
-          <div class="project-details">
-
-            <div class="project-detail">
-              <h4>The Objective</h4>
-            <p>
-              Analyze whether attention heads develop functional roles and quantify their importance using causal ablation.
-            </p>
+        <div class="project-body">
+          <div class="project-body-inner">
+            <div class="project-media">
+              <img src="assets/images/architecture.png" alt="RealSignal Architecture" loading="lazy" />
             </div>
-
-            <div class="project-detail">
-              <h4>The Method</h4>
-              <p>
-                Built a transformer from scratch and analyzed attention using entropy, positional patterns, and causal ablation.
-              </p>
+            <div class="project-grid">
+              <div class="project-cell">
+                <h5>Problem</h5>
+                <p>Fraud patterns evolve continuously, making static detection systems unreliable in production.</p>
+              </div>
+              <div class="project-cell">
+                <h5>Approach</h5>
+                <p>Streaming-first anomaly detection with monitoring and adaptive retraining workflows.</p>
+              </div>
+              <div class="project-cell">
+                <h5>Execution</h5>
+                <p>Kafka streaming → online feature engineering → Isolation Forest inference → PSI drift monitoring.</p>
+              </div>
+              <div class="project-cell">
+                <h5>Outcome</h5>
+                <p>Real-time anomaly detection with observability, drift awareness, and operational ML lifecycle management.</p>
+              </div>
             </div>
-
-            <div class="project-detail">
-              <h4>Key Findings</h4>
-              <ul>
-                <li>Specialization is task-dependent and emerges primarily in early layers</li>
-                <li>Head importance is asymmetric. Identity heads act as critical bottlenecks</li>
-              </ul>
+            <p class="project-stack">FastAPI · Kafka · Isolation Forest · MLflow · Docker · AWS</p>
+            <div class="project-links">
+              <a href="http://realsignalml.duckdns.org" class="btn btn-solid" target="_blank">Live ↗</a>
+              <a href="https://github.com/Himanshu-2678/RealSignal" class="btn btn-ghost" target="_blank">GitHub</a>
             </div>
-
-            <div class="project-detail">
-              <h4>Core Insight</h4>
-              <p>
-                Transformer computation is not uniform. a small subset of heads carries most of the critical behavior.
-              </p>
-            </div>
-
-          </div>
-
-          <p class="project-tech">
-            Built from scratch in PyTorch with custom attention modules and a causal analysis pipeline.
-          </p>
-
-          <div class="project-actions">
-            <a href="https://github.com/Himanshu-2678" 
-              class="project-btn github-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- MeetSync -->
-      <div class="project reveal">
-        <h2 class="project-title">MeetSync</h2>
-        <p class="project-philosophy">A system that removes friction from meetings.</p>
-        <button class="project-toggle">View more</button>
-        <div class="project-content">
-          <div class="project-media">
-            <img src="assets/images/architecure_diagram_meetsync.png"
-                 alt="Transformer Architecture" loading="lazy" />
-          </div>
-          <div class="project-details">
-            <div class="project-detail">
-              <h4>The Problem</h4>
-              <p>Meetings create information, but decisions and ownership get lost.</p>
-            </div>
-            <div class="project-detail">
-              <h4>The Idea</h4>
-              <p>Transform audio into structured decisions and actionable tasks.</p>
-            </div>
-            <div class="project-detail">
-              <h4>The Execution</h4>
-              <p>Speech → Text → schema-validated task extraction.</p>
-            </div>
-            <div class="project-detail">
-              <h4>The Outcome</h4>
-              <p>Clear decisions, assigned tasks, instant results, reduced manual effort.</p>
-            </div>
-          </div>
-          <p class="project-tech">Built with Flask, PostgreSQL, Deepgram and Gemini</p>
-          <div class="project-actions">
-            <a href="https://meetsync-ljni.onrender.com" class="project-btn live-btn">Live</a>
-            <a href="https://github.com/Himanshu-2678/MeetSync"
-               class="project-btn github-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </div>
       </div>
 
-      <!-- Early Churn Intelligence -->
-      <div class="project reveal">
-        <h2 class="project-title">Early Churn Intelligence</h2>
-        <p class="project-philosophy">Understanding users before they leave.</p>
-        <button class="project-toggle">View more</button>
-        <div class="project-content">
-          <div class="project-media">
-            <img src="assets/images/architecture_diagram.png"
-                 alt="Early churn intelligence system architecture" loading="lazy" />
+      <!-- 2 — PathwayIQ -->
+      <div class="project-item reveal">
+        <div class="project-header">
+          <div>
+            <p class="project-number">02</p>
+            <h2 class="project-name">PathwayIQ</h2>
+            <p class="project-tagline">Reliability-aware clinical decision support intelligence system</p>
           </div>
-          <div class="project-details">
-            <div class="project-detail">
-              <h4>The Problem</h4>
-              <p>Churn is usually identified after users leave, making it hard to understand
-                 which behavioral signals indicated risk earlier.</p>
+          <button class="project-toggle-btn" aria-label="Expand project">
+            <span class="toggle-icon"></span>
+          </button>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+            <div class="project-media">
+              <img src="assets/images/pathwayIQ-architecture-diagram.png" alt="PathwayIQ Architecture" loading="lazy" />
             </div>
-            <div class="project-detail">
-              <h4>The Idea</h4>
-              <p>Model churn risk by analyzing how user activity patterns change over time
-                 instead of relying on final churn events alone.</p>
+            <div class="project-grid">
+              <div class="project-cell">
+                <h5>Problem</h5>
+                <p>Hospital readmissions increase operational costs and patient risk when high-risk cases are missed.</p>
+              </div>
+              <div class="project-cell">
+                <h5>Approach</h5>
+                <p>Predict calibrated 30-day readmission risk with explainable machine learning.</p>
+              </div>
+              <div class="project-cell">
+                <h5>Execution</h5>
+                <p>Clinical preprocessing → calibrated XGBoost inference → SHAP explanations → drift monitoring and retraining.</p>
+              </div>
+              <div class="project-cell">
+                <h5>Outcome</h5>
+                <p>Explainable risk predictions with monitoring, lifecycle tracking, and clinician-support workflows.</p>
+              </div>
             </div>
-            <div class="project-detail">
-              <h4>The Execution</h4>
-              <p>Built a behavioral data pipeline, engineered features, and trained baseline
-                 models to estimate early churn risk under practical constraints.</p>
-            </div>
-            <div class="project-detail">
-              <h4>The Outcome</h4>
-              <p>Gained a clearer understanding of how ML systems behave in practice, including
-                 feature design, evaluation trade-offs, and system limitations.</p>
+            <p class="project-stack">FastAPI · XGBoost · SHAP · Docker · GitHub Actions · AWS</p>
+            <div class="project-links">
+              <a href="http://pathwayiq.duckdns.org" class="btn btn-solid" target="_blank">Live ↗</a>
+              <a href="https://github.com/Himanshu-2678/pathwayIQ" class="btn btn-ghost" target="_blank">GitHub</a>
             </div>
           </div>
-          <p class="project-tech">Built with Python, PostgreSQL, and Logistic Regression</p>
-          <div class="project-actions">
-            <a href="https://github.com/Himanshu-2678/early-churn-intelligence"
-               class="project-btn github-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+
+      <!-- 3 — AegisAI -->
+      <div class="project-item reveal">
+        <div class="project-header">
+          <div>
+            <p class="project-number">03</p>
+            <h2 class="project-name">AegisAI</h2>
+            <p class="project-tagline">Self-healing orchestration layer for reliable LLM systems</p>
+          </div>
+          <button class="project-toggle-btn" aria-label="Expand project">
+            <span class="toggle-icon"></span>
+          </button>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+            <div class="project-media">
+              <img src="assets/images/architecture_diagram_aegisAI.png" alt="AegisAI Architecture" loading="lazy" />
+            </div>
+            <div class="project-grid">
+              <div class="project-cell">
+                <h5>Objective</h5>
+                <p>Control-layer architecture with security filtering, RAG, adversarial multi-agent validation, and self-healing recovery loops.</p>
+              </div>
+              <div class="project-cell">
+                <h5>System</h5>
+                <p>Multi-stage pipeline with input security, RAG, multi-agent validation, and recovery orchestration with full observability.</p>
+              </div>
+              <div class="project-cell">
+                <h5>Results</h5>
+                <ul>
+                  <li>Reduced hallucination pass-through to ~5%</li>
+                  <li>Achieved 100% security block rate</li>
+                </ul>
+              </div>
+              <div class="project-cell">
+                <h5>Core Insight</h5>
+                <p>LLMs cannot be trusted as standalone systems — reliability requires external control, validation, and failure-aware orchestration.</p>
+              </div>
+            </div>
+            <p class="project-stack">Python · Local LLMs (Ollama) · Agent-based validation · RAG pipeline · Observability tooling</p>
+            <div class="project-links">
+              <a href="https://github.com/Himanshu-2678/aegisAI" class="btn btn-ghost" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 — MeetSync -->
+      <div class="project-item reveal">
+        <div class="project-header">
+          <div>
+            <p class="project-number">04</p>
+            <h2 class="project-name">MeetSync</h2>
+            <p class="project-tagline">A system that removes friction from meetings</p>
+          </div>
+          <button class="project-toggle-btn" aria-label="Expand project">
+            <span class="toggle-icon"></span>
+          </button>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+            <div class="project-media">
+              <img src="assets/images/meetsync_architecture.png" alt="MeetSync Architecture" loading="lazy" />
+            </div>
+            <div class="project-grid">
+              <div class="project-cell">
+                <h5>Problem</h5>
+                <p>Meetings create information, but decisions and ownership get lost.</p>
+              </div>
+              <div class="project-cell">
+                <h5>Approach</h5>
+                <p>Transform audio into structured decisions and actionable tasks.</p>
+              </div>
+              <div class="project-cell">
+                <h5>Execution</h5>
+                <p>Speech → Text → schema-validated task extraction.</p>
+              </div>
+              <div class="project-cell">
+                <h5>Outcome</h5>
+                <p>Clear decisions, assigned tasks, instant results, reduced manual effort.</p>
+              </div>
+            </div>
+            <p class="project-stack">Flask · PostgreSQL · Deepgram · Gemini</p>
+            <div class="project-links">
+              <a href="https://meetsync-ljni.onrender.com" class="btn btn-solid" target="_blank">Live ↗</a>
+              <a href="https://github.com/Himanshu-2678/MeetSync" class="btn btn-ghost" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 — Transformer From Scratch -->
+      <div class="project-item reveal">
+        <div class="project-header">
+          <div>
+            <p class="project-number">05</p>
+            <h2 class="project-name">Transformer From Scratch</h2>
+            <p class="project-tagline">Mechanistic analysis of attention in transformers</p>
+          </div>
+          <button class="project-toggle-btn" aria-label="Expand project">
+            <span class="toggle-icon"></span>
+          </button>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+            <div class="project-media">
+              <img src="assets/images/transformer_architecture.png" alt="Transformer Architecture" loading="lazy" />
+            </div>
+            <div class="project-grid">
+              <div class="project-cell">
+                <h5>Objective</h5>
+                <p>Analyze whether attention heads develop functional roles and quantify their importance using causal ablation.</p>
+              </div>
+              <div class="project-cell">
+                <h5>Method</h5>
+                <p>Built a transformer from scratch and analyzed attention using entropy, positional patterns, and causal ablation.</p>
+              </div>
+              <div class="project-cell">
+                <h5>Key Findings</h5>
+                <ul>
+                  <li>Specialization is task-dependent, emerging primarily in early layers</li>
+                  <li>Head importance is asymmetric; identity heads act as critical bottlenecks</li>
+                </ul>
+              </div>
+              <div class="project-cell">
+                <h5>Core Insight</h5>
+                <p>Transformer computation is not uniform — a small subset of heads carries most of the critical behavior.</p>
+              </div>
+            </div>
+            <p class="project-stack">PyTorch · Custom attention modules · Causal analysis pipeline</p>
+            <div class="project-links">
+              <a href="https://github.com/Himanshu-2678" class="btn btn-ghost" target="_blank">GitHub</a>
+            </div>
           </div>
         </div>
       </div>
@@ -943,137 +1255,122 @@
 
   <!-- WRITING -->
   <section class="writing-section" id="writing">
-    <div class="writing-container">
-      <div class="writing-header reveal">
-        <h2 class="section-title">Writing</h2>
+    <div class="writing-inner">
+      <div class="section-label reveal" style="justify-content:space-between;">
+        <span>Writing</span>
         <a href="https://substack.com/@himanshuyadav7" target="_blank" class="substack-link">
-          Read on Substack
+          Substack ↗
         </a>
       </div>
 
-      <div class="writing-item reveal">
-        <a href="https://open.substack.com/pub/himanshuyadav7/p/the-myth-of-the-simple-ai-app?r=3wzp9h&utm_campaign=post&utm_medium=web" target="_blank">
-          <h3 class="writing-title">The Myth of the "Simple AI App"</h3>
-          <p class="writing-excerpt">Why building AI products often feels like 80% infrastructure and only 20% model.</p>
-        </a>
-      </div>
+      <div class="writing-list">
+        <div class="writing-item reveal">
+          <a href="https://open.substack.com/pub/himanshuyadav7/p/the-myth-of-the-simple-ai-app?r=3wzp9h&utm_campaign=post&utm_medium=web" target="_blank">
+            <div>
+              <h3 class="writing-title">The Myth of the "Simple AI App"</h3>
+              <p class="writing-excerpt">Why building AI products often feels like 80% infrastructure and only 20% model.</p>
+            </div>
+            <span class="writing-arrow">↗</span>
+          </a>
+        </div>
 
-      <div class="writing-item reveal">
-        <a href="https://himanshuyadav7.substack.com/p/machine-learning-cannot-predict-what" target="_blank">
-          <h3 class="writing-title">Machine Learning cannot Predict what the System cannot observe</h3>
-          <p class="writing-excerpt">An exploration of the time aware early churn modelling and what the data simply refused to tell.</p>
-        </a>
-      </div>
+        <div class="writing-item reveal">
+          <a href="https://himanshuyadav7.substack.com/p/machine-learning-cannot-predict-what" target="_blank">
+            <div>
+              <h3 class="writing-title">Machine Learning Cannot Predict What the System Cannot Observe</h3>
+              <p class="writing-excerpt">An exploration of time-aware early churn modelling and what the data simply refused to tell.</p>
+            </div>
+            <span class="writing-arrow">↗</span>
+          </a>
+        </div>
 
-      <div class="writing-item reveal">
-        <a href="https://medium.com/@radhekrishna8267/energy-consumption-forecasting-my-first-project-3c855e9d5921" target="_blank">
-          <h3 class="writing-title">Energy Consumption Forecasting</h3>
-          <p class="writing-excerpt">A walkthrough of my first ML project: forecasting energy consumption using time-series data and model development.</p>
-        </a>
+        <div class="writing-item reveal">
+          <a href="https://medium.com/@radhekrishna8267/energy-consumption-forecasting-my-first-project-3c855e9d5921" target="_blank">
+            <div>
+              <h3 class="writing-title">Energy Consumption Forecasting</h3>
+              <p class="writing-excerpt">A walkthrough of my first ML project: forecasting energy consumption using time-series data and model development.</p>
+            </div>
+            <span class="writing-arrow">↗</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section class="contact-section" id="contact">
-    <p class="contact-heading reveal">Contact</p>
-    <p class="contact-message reveal">
-      If something here resonated, I'd like to hear from you.
-      I'm looking for opportunities in applied AI and ML engineering.
-    </p>
-    <div class="contact-email-wrapper reveal">
-      <span class="contact-email-label">Email:</span>
-      <a href="mailto:radhekrishna8267@gmail.com" class="contact-email">
-        radhekrishna8267@gmail.com
-      </a>
-    </div>
-    <div class="contact-buttons reveal">
-      <a href="https://github.com/Himanshu-2678" target="_blank" class="contact-btn">GitHub</a>
-      <a href="https://www.linkedin.com/in/himanshuy26/" target="_blank" class="contact-btn">LinkedIn</a>
+    <div class="contact-inner">
+      <div>
+        <p class="section-label reveal">Contact</p>
+        <h2 class="contact-headline reveal reveal-delay-1">
+          Get <em>in Touch</em>
+        </h2>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <p class="contact-desc">
+          I'm currently looking for opportunities in Machine Learning,
+          Applied AI Engineering, and Infrastructure-oriented roles.
+        </p>
+        <a href="mailto:radhekrishna8267@gmail.com" class="contact-email">
+          Email: radhekrishna8267@gmail.com
+        </a>
+        <div class="contact-socials">
+          <a href="https://github.com/Himanshu-2678" target="_blank" class="btn btn-ghost">GitHub</a>
+          <a href="https://www.linkedin.com/in/himanshuy26/" target="_blank" class="btn btn-ghost">LinkedIn</a>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
     <span class="footer-copy">© 2026 Himanshu Yadav</span>
+    <span class="footer-copy">ML Engineer · India</span>
   </footer>
 
-  <!-- =========================================================
-       SCRIPTS
-       ========================================================= -->
   <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
 
-    /* Toggle project details */
-    document.querySelectorAll('.project-toggle').forEach(button => {
-      button.addEventListener('click', () => {
-        const content = button.nextElementSibling;
-        const isOpen = content.classList.contains('open');
-        content.classList.toggle('open');
-        button.textContent = isOpen ? 'View more' : 'Click to collapse';
+    // Mobile hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Project accordion — click anywhere on header
+    document.querySelectorAll('.project-item').forEach(item => {
+      item.querySelector('.project-header').addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.project-item.open').forEach(o => o.classList.remove('open'));
+        // Toggle clicked
+        if (!isOpen) item.classList.add('open');
       });
     });
-  </script>
 
-  <script>
-    /* Hero scroll animation */
-    document.addEventListener('DOMContentLoaded', () => {
-      const hero    = document.querySelector('.hero');
-      const trigger = document.querySelector('.hero-identity');
-      let hasVisited = false;
-
-      const playObserver = new IntersectionObserver(([entry]) => {
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-          hero.classList.toggle('fast', hasVisited);
-          hasVisited = true;
-          hero.classList.add('animate');
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
-      }, { root: null, threshold: 0, rootMargin: '-50% 0px -10% 0px' });
+      });
+    }, { threshold: 0.1 });
 
-      const resetObserver = new IntersectionObserver(([entry]) => {
-        if (!entry.isIntersecting) hero.classList.remove('animate');
-      }, { threshold: 0 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-      playObserver.observe(trigger);
-      resetObserver.observe(hero);
+    // Trigger reveals already in viewport on load
+    document.querySelectorAll('.reveal').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) el.classList.add('visible');
     });
   </script>
-
-  <script>
-    /* Scroll reveal */
-    document.addEventListener('DOMContentLoaded', () => {
-      const revealObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
-
-      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-    });
-  </script>
-
-  <script>
-    const navbar = document.getElementById('navbar');
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-
-    /* Frosted glass on scroll */
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 80);
-    });
-
-    /* Mobile toggle */
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-    });
-
-    /* Close menu on link click (mobile) */
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => navLinks.classList.remove('open'));
-    });
-  </script>
-
 </body>
 </html>
