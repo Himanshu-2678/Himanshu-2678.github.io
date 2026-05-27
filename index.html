@@ -1346,11 +1346,7 @@
     // Project accordion — click anywhere on header
     document.querySelectorAll('.project-item').forEach(item => {
       item.querySelector('.project-header').addEventListener('click', () => {
-        const isOpen = item.classList.contains('open');
-        // Close all
-        document.querySelectorAll('.project-item.open').forEach(o => o.classList.remove('open'));
-        // Toggle clicked
-        if (!isOpen) item.classList.add('open');
+        item.classList.toggle('open');
       });
     });
 
